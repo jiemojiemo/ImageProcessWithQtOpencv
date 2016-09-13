@@ -5,8 +5,8 @@
 #include <QApplication>
 #include <QTextCodec>
 
-#pragma comment(lib, "G:\\Opencv\\lib\\3-1-0\\opencv\\build\\x64\\vc14\\lib\\opencv_world310.lib")
-#pragma comment(lib, "G:\\Opencv\\lib\\3-1-0\\opencv\\build\\x64\\vc14\\lib\\opencv_world310d.lib")
+#pragma comment(lib, "./opencv/x64/vc14/lib/opencv_world310.lib")
+#pragma comment(lib, "./opencv/x64/vc14/lib/opencv_world310d.lib")
 
 void ShowImageTest();
 int main(int argc, char *argv[])

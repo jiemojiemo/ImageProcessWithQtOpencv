@@ -1,0 +1,7 @@
+#exe
+*.exe
+*.user
+#director
+/opencv/
+/release/
+/debug/
