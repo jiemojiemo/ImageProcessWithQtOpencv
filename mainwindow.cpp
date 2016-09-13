@@ -96,3 +96,30 @@ void MainWindow::ShowImageInGraphicsView(const QImage &img)
     ui->graphicsView->show();
 }
 
+
+void MainWindow::on_actionOpen_triggered()
+{
+    auto filename = GetFilename();
+    ReadImage(filename);
+    ShowImage();
+}
+
+void MainWindow::on_actionEdge_Detect_triggered()
+{
+    cv::Mat dst;
+
+           //输入图像
+           //输出图像
+           //输入图像颜色通道数
+           //x方向阶数
+           //y方向阶数
+    cv::Sobel(m_img,dst,m_img.depth(),1,1);
+    CVMatToQImage(dst, m_qtImg);
+    ShowImageInGraphicsView(m_qtImg);
+}
+
+void MainWindow::on_actionClose_triggered()
+{
+    ui->graphicsView->scene()->clear();
+
+}

@@ -20,6 +20,12 @@ private slots:
     void on_ID_BUT_READ_clicked();
     void on_ID_BUT_PROC_clicked();
 
+    void on_actionOpen_triggered();
+
+    void on_actionEdge_Detect_triggered();
+
+    void on_actionClose_triggered();
+
 private:
     QString GetFilename();
     void ReadImage(const QString& filename);

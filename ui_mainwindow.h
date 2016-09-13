@@ -17,8 +17,8 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -28,12 +28,15 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionOpen;
+    QAction *actionEdge_Detect;
+    QAction *actionClose;
     QWidget *centralWidget;
-    QPushButton *ID_BUT_READ;
-    QPushButton *ID_BUT_PROC;
     QLabel *label;
     QGraphicsView *graphicsView;
     QMenuBar *menuBar;
+    QMenu *menu_F;
+    QMenu *menuProcess;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -42,24 +45,28 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(400, 300);
+        actionOpen = new QAction(MainWindow);
+        actionOpen->setObjectName(QStringLiteral("actionOpen"));
+        actionEdge_Detect = new QAction(MainWindow);
+        actionEdge_Detect->setObjectName(QStringLiteral("actionEdge_Detect"));
+        actionClose = new QAction(MainWindow);
+        actionClose->setObjectName(QStringLiteral("actionClose"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        ID_BUT_READ = new QPushButton(centralWidget);
-        ID_BUT_READ->setObjectName(QStringLiteral("ID_BUT_READ"));
-        ID_BUT_READ->setGeometry(QRect(20, 60, 75, 23));
-        ID_BUT_PROC = new QPushButton(centralWidget);
-        ID_BUT_PROC->setObjectName(QStringLiteral("ID_BUT_PROC"));
-        ID_BUT_PROC->setGeometry(QRect(20, 120, 75, 23));
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(123, 11, 261, 241));
         graphicsView = new QGraphicsView(centralWidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
-        graphicsView->setGeometry(QRect(120, 20, 256, 192));
+        graphicsView->setGeometry(QRect(5, 1, 381, 231));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 400, 23));
+        menu_F = new QMenu(menuBar);
+        menu_F->setObjectName(QStringLiteral("menu_F"));
+        menuProcess = new QMenu(menuBar);
+        menuProcess->setObjectName(QStringLiteral("menuProcess"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -67,6 +74,12 @@ public:
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
+
+        menuBar->addAction(menu_F->menuAction());
+        menuBar->addAction(menuProcess->menuAction());
+        menu_F->addAction(actionOpen);
+        menu_F->addAction(actionClose);
+        menuProcess->addAction(actionEdge_Detect);
 
         retranslateUi(MainWindow);
 
@@ -76,9 +89,12 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
-        ID_BUT_READ->setText(QApplication::translate("MainWindow", "ReadImage", 0));
-        ID_BUT_PROC->setText(QApplication::translate("MainWindow", "Do Process", 0));
+        actionOpen->setText(QApplication::translate("MainWindow", "Open New Image", 0));
+        actionEdge_Detect->setText(QApplication::translate("MainWindow", "Edge Detect", 0));
+        actionClose->setText(QApplication::translate("MainWindow", "Close Current Image", 0));
         label->setText(QString());
+        menu_F->setTitle(QApplication::translate("MainWindow", "File(&F)", 0));
+        menuProcess->setTitle(QApplication::translate("MainWindow", "Process", 0));
     } // retranslateUi
 
 };
