@@ -16,8 +16,15 @@ INCLUDEPATH += ./opencv/include \
                ./opencv/include\opencv2
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    DataStructure/Image.cpp \
+    Magic/EdgeDetector.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    common/common.h \
+    common/scopeguard.h \
+    DataStructure/Image.h \
+    Magic/EdgeDetector.h \
+    Magic/Magician.h
 
 FORMS    += mainwindow.ui

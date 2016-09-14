@@ -4,6 +4,7 @@
 #include "core.hpp"
 #include "imgproc.hpp"
 
+#include "Magic/EdgeDetector.h"
 
 #include <QString>
 #include <QFileDialog>
@@ -22,50 +23,32 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_ID_BUT_READ_clicked()
-{
-    auto filename = GetFilename();
-    ReadImage(filename);
-    ShowImage();
-}
-
-void MainWindow::on_ID_BUT_PROC_clicked()
-{
-    cv::Mat dst;
-
-           //输入图像
-           //输出图像
-           //输入图像颜色通道数
-           //x方向阶数
-           //y方向阶数
-    cv::Sobel(m_img,dst,m_img.depth(),1,1);
-    CVMatToQImage(dst, m_qtImg);
-    ShowImageInGraphicsView(m_qtImg);
-}
-
 QString MainWindow::GetFilename()
 {
     QString filename = QFileDialog::getOpenFileName(
                 this,tr("Open Image"),".",tr("Image File(*.png *.jpg *.jpeg *.bmp)"));
-    return filename;
+	return filename;
 }
 
 void MainWindow::ReadImage(const QString& filename)
 {
+	if (filename.isEmpty())
+		return;
+
     QByteArray ba = filename.toLocal8Bit();
-    m_img = cv::imread(ba.data());
+	m_img = cv::imread(ba.data());
 
-
-    cv::cvtColor(m_img,m_img, CV_BGR2RGB);
+    //cv::cvtColor(m_img.GetMat(),m_img.GetMat(), CV_BGR2RGB);
     CVMatToQImage(m_img, m_qtImg);
-    //QImage img =  QImage((const unsigned char*)(m_img.data),m_img.cols,m_img.rows,m_img.cols*m_img.channels(),QImage::Format_RGB888);
-    //QImage img =  QImage((const unsigned char*)(matTmp.data),matTmp.cols,matTmp.rows,matTmp.cols*matTmp.channels(),QImage::Format_RGB888);
-    //m_qtImg = img;
 }
 
 void MainWindow::CVMatToQImage(const cv::Mat &mat, QImage &img)
 {
     img =  QImage((const unsigned char*)(mat.data),mat.cols,mat.rows,mat.cols*mat.channels(),QImage::Format_RGB888);
+}
+void MainWindow::CVMatToQImage(const Image& img, QImage& qImg)
+{
+	this->CVMatToQImage(img.GetMat(), qImg);
 }
 
 void MainWindow::ShowImage()
@@ -106,15 +89,9 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_actionEdge_Detect_triggered()
 {
-    cv::Mat dst;
-
-           //输入图像
-           //输出图像
-           //输入图像颜色通道数
-           //x方向阶数
-           //y方向阶数
-    cv::Sobel(m_img,dst,m_img.depth(),1,1);
-    CVMatToQImage(dst, m_qtImg);
+	EdgeDetector edge;
+	edge.DoMagic(m_img);
+	CVMatToQImage(m_img, m_qtImg);
     ShowImageInGraphicsView(m_qtImg);
 }
 
