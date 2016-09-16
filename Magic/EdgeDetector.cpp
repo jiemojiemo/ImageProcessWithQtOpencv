@@ -9,6 +9,6 @@ void SobelProc(cv::Mat& mat)
 
 void EdgeDetector::DoMagic(Image& img)
 {
-	SobelProc(img.m_mat);
+	SobelProc(img.GetMat());
 }
 

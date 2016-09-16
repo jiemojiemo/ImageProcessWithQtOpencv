@@ -5,7 +5,6 @@
 class EdgeDetector : public Magician
 {
 	DISALLOW_COPY_AND_ASSIGN(EdgeDetector);
-	friend class Image;
 public:
 	EdgeDetector() = default;
 	~EdgeDetector() = default;

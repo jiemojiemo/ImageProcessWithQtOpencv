@@ -5,7 +5,6 @@ class EdgeDetector;
 class cv::Mat;
 class Image
 {
-	friend class EdgeDetector;
 public:
 	Image() = default;
 	Image(const cv::Mat& mat);
