@@ -25,12 +25,14 @@ private slots:
 
     void on_actionClose_triggered();
 
+	void on_actionSave_triggered();
+
+	void on_actionSave_As_triggered();
+
 private:
     QString GetFilename();
     void ReadImage(const QString& filename);
 
-    void CVMatToQImage(const cv::Mat& mat, QImage& qImg);
-	void CVMatToQImage(const Image& img, QImage& qImg);
     void ShowImage();
     void ShowImageInLabel(const QImage& img);
     void ShowImageInGraphicsView(const QImage& img);
@@ -38,6 +40,7 @@ private:
     Ui::MainWindow *ui;
     QImage m_qtImg;
 	Image m_img;
+	QString m_openedFilename;
 };
 
 #endif // MAINWINDOW_H

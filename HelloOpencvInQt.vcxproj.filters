@@ -54,6 +54,15 @@
     <Filter Include="DataStructure">
       <UniqueIdentifier>{aab94dc3-9f80-4be1-969e-5ea8393b50e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FileOperator">
+      <UniqueIdentifier>{9e2670ae-571e-4374-abc5-de74dd06331d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Context">
+      <UniqueIdentifier>{6f264a02-217e-46c1-ad19-15629ef3d240}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageChanger">
+      <UniqueIdentifier>{6e81285a-3a98-4b01-b08a-d569c94b0f0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -73,6 +82,15 @@
     </ClCompile>
     <ClCompile Include="DataStructure\Image.cpp">
       <Filter>DataStructure</Filter>
+    </ClCompile>
+    <ClCompile Include="FileOperator\QImageFileOperator.cpp">
+      <Filter>FileOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="Context\Context.cpp">
+      <Filter>Context</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageChanger\ToQImage.cpp">
+      <Filter>ImageChanger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +118,18 @@
     </ClInclude>
     <ClInclude Include="DataStructure\Image.h">
       <Filter>DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="FileOperator\QImageFileOperator.h">
+      <Filter>FileOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="Context\Context.h">
+      <Filter>Context</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageChanger\ToQImage.h">
+      <Filter>ImageChanger</Filter>
+    </ClInclude>
+    <ClInclude Include="FileOperator\ImageFileOperator.h">
+      <Filter>FileOperator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,10 +5,16 @@
 #include "imgproc.hpp"
 
 #include "Magic/EdgeDetector.h"
+#include "ImageChanger/ToQImage.h"
+#include "FileOperator/ImageFileOperator.h"
+#include "FileOperator/QImageFileOperator.h"
+
+#include <memory>
 
 #include <QString>
 #include <QFileDialog>
 #include <QDebug>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -39,16 +45,7 @@ void MainWindow::ReadImage(const QString& filename)
 	m_img = cv::imread(ba.data());
 
     //cv::cvtColor(m_img.GetMat(),m_img.GetMat(), CV_BGR2RGB);
-    CVMatToQImage(m_img, m_qtImg);
-}
-
-void MainWindow::CVMatToQImage(const cv::Mat &mat, QImage &img)
-{
-    img =  QImage((const unsigned char*)(mat.data),mat.cols,mat.rows,mat.cols*mat.channels(),QImage::Format_RGB888);
-}
-void MainWindow::CVMatToQImage(const Image& img, QImage& qImg)
-{
-	this->CVMatToQImage(img.GetMat(), qImg);
+	ToQImage::DoChange(m_img, m_qtImg);
 }
 
 void MainWindow::ShowImage()
@@ -82,8 +79,10 @@ void MainWindow::ShowImageInGraphicsView(const QImage &img)
 
 void MainWindow::on_actionOpen_triggered()
 {
-    auto filename = GetFilename();
-    ReadImage(filename);
+	auto fileOperator(std::make_unique<QImageFileOperator>());
+
+	m_openedFilename = QString::fromStdString(fileOperator->Open());
+    ReadImage(m_openedFilename);
     ShowImage();
 }
 
@@ -91,12 +90,24 @@ void MainWindow::on_actionEdge_Detect_triggered()
 {
 	EdgeDetector edge;
 	edge.DoMagic(m_img);
-	CVMatToQImage(m_img, m_qtImg);
+	ToQImage::DoChange(m_img, m_qtImg);
     ShowImageInGraphicsView(m_qtImg);
 }
 
 void MainWindow::on_actionClose_triggered()
 {
     ui->graphicsView->scene()->clear();
-
 }
+
+void MainWindow::on_actionSave_triggered()
+{
+	auto fileOperator(std::make_unique<QImageFileOperator>());
+	fileOperator->Save(m_img, m_openedFilename.toStdString());
+}
+
+void MainWindow::on_actionSave_As_triggered()
+{
+	auto fileOperator(std::make_unique<QImageFileOperator>());
+	fileOperator->SaveAs(m_img);
+}
+
