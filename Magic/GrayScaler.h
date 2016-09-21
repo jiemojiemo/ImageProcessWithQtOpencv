@@ -11,4 +11,4 @@ public:
 
 	virtual void DoMagic(Image& img);
 };
-#pragma once
+
