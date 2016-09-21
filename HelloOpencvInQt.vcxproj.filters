@@ -92,6 +92,9 @@
     <ClCompile Include="ImageChanger\ToQImage.cpp">
       <Filter>ImageChanger</Filter>
     </ClCompile>
+    <ClCompile Include="Magic\GrayScaler.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="FileOperator\ImageFileOperator.h">
       <Filter>FileOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\GrayScaler.h">
+      <Filter>Magic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

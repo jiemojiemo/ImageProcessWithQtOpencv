@@ -1,10 +1,8 @@
 #pragma once
-
 #include "common/common.h"
 
 class Image;
 class QImage;
-
 class ToQImage
 {
 	DISALLOW_COPY_AND_ASSIGN(ToQImage);
