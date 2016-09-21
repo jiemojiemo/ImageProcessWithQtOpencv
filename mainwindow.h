@@ -29,6 +29,10 @@ private slots:
 
 	void on_actionSave_As_triggered();
 
+	void on_actionLeft_90_triggered();
+
+	void on_actionRight_90_triggered();
+
 private:
     QString GetFilename();
     void ReadImage(const QString& filename);

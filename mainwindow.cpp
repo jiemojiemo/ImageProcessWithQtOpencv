@@ -8,6 +8,8 @@
 #include "ImageChanger/ToQImage.h"
 #include "FileOperator/ImageFileOperator.h"
 #include "FileOperator/QImageFileOperator.h"
+#include "ImageRotator/QImageRotator.h"
+#include "Context/Context.h"
 
 #include <memory>
 
@@ -15,6 +17,14 @@
 #include <QFileDialog>
 #include <QDebug>
 #include <QMessageBox>
+#include <QMatrix>
+
+void DoRotate(QImage& qImg, int rotate)
+{
+	QMatrix rotateMatrix;
+	rotateMatrix.rotate(rotate);
+	qImg = qImg.transformed(rotateMatrix);
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -67,6 +77,9 @@ void MainWindow::ShowImageInLabel(const QImage &img)
 void MainWindow::ShowImageInGraphicsView(const QImage &img)
 {
     ui->graphicsView->resize(img.width(), img.height());
+
+
+
     auto graphicsScenc = new QGraphicsScene();
     graphicsScenc->addPixmap(QPixmap::fromImage(img));
 
@@ -109,5 +122,19 @@ void MainWindow::on_actionSave_As_triggered()
 {
 	auto fileOperator(std::make_unique<QImageFileOperator>());
 	fileOperator->SaveAs(m_img);
+}
+
+void MainWindow::on_actionLeft_90_triggered()
+{
+	QImageRotator rotate;
+	rotate.Rotate(m_qtImg,Context::CtxLeftRotateDegree);
+	ShowImageInGraphicsView(m_qtImg);
+}
+
+void MainWindow::on_actionRight_90_triggered()
+{
+	QImageRotator rotate;
+	rotate.Rotate(m_qtImg, Context::CtxRightRotateDegree);
+	ShowImageInGraphicsView(m_qtImg);
 }
 

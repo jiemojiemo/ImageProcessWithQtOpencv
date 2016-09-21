@@ -3,6 +3,8 @@
 #include "common/common.h"
 #include <string>
 
+
+
 class Context
 {
 	DISALLOW_COPY_AND_ASSIGN(Context);
@@ -19,4 +21,8 @@ public:
 	
 	bool SetOpenModel(bool isOPen) { m_isOpenedImage = isOPen; }
 	bool IsOpenedImage()const { return m_isOpenedImage; }
+
+public:
+	static const int CtxLeftRotateDegree;
+	static const int CtxRightRotateDegree;
 };

@@ -63,6 +63,9 @@
     <Filter Include="ImageChanger">
       <UniqueIdentifier>{6e81285a-3a98-4b01-b08a-d569c94b0f0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ImageRotator">
+      <UniqueIdentifier>{33f0d78b-a87b-4233-a007-cfedb250e650}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -91,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="ImageChanger\ToQImage.cpp">
       <Filter>ImageChanger</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageRotator\QImageRotator.cpp">
+      <Filter>ImageRotator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="FileOperator\ImageFileOperator.h">
       <Filter>FileOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageRotator\QImageRotator.h">
+      <Filter>ImageRotator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

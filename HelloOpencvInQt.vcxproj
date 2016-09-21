@@ -148,6 +148,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ImageChanger\ToQImage.cpp" />
+    <ClCompile Include="ImageRotator\QImageRotator.cpp" />
     <ClCompile Include="Magic\EdgeDetector.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="FileOperator\ImageFileOperator.h" />
     <ClInclude Include="FileOperator\QImageFileOperator.h" />
     <ClInclude Include="ImageChanger\ToQImage.h" />
+    <ClInclude Include="ImageRotator\QImageRotator.h" />
     <ClInclude Include="Magic\EdgeDetector.h" />
     <ClInclude Include="Magic\Magician.h" />
     <CustomBuild Include="mainwindow.h">
