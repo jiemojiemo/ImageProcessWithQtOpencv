@@ -1,9 +1,7 @@
 #pragma once
 
 #include "common/common.h"
-#include <string>
-
-
+#include <QString>
 
 class Context
 {
@@ -11,13 +9,13 @@ class Context
 private:
 	Context();
 private:
-	std::string m_currentFilename;
+	QString m_currentFilename;
 	bool m_isOpenedImage;
 public:
 	static Context& GetContext();
 public:
-	std::string GetCurrentFilename()const { return m_currentFilename; }
-	void SetCurrentFilename(const std::string& filename) { m_currentFilename = filename; }
+	QString GetCurrentFilename()const { return m_currentFilename; }
+	void SetCurrentFilename(const QString& filename) { m_currentFilename = filename; }
 	
 	bool SetOpenModel(bool isOPen) { m_isOpenedImage = isOPen; }
 	bool IsOpenedImage()const { return m_isOpenedImage; }

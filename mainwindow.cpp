@@ -5,7 +5,7 @@
 #include "imgproc.hpp"
 
 #include "Magic/EdgeDetector.h"
-#include "ImageChanger/ToQImage.h"
+#include "ImageChanger/ImageToQImage.h"
 #include "FileOperator/ImageFileOperator.h"
 #include "FileOperator/QImageFileOperator.h"
 #include "ImageRotator/QImageRotator.h"
@@ -54,8 +54,7 @@ void MainWindow::ReadImage(const QString& filename)
     QByteArray ba = filename.toLocal8Bit();
 	m_img = cv::imread(ba.data());
 
-    //cv::cvtColor(m_img.GetMat(),m_img.GetMat(), CV_BGR2RGB);
-	ToQImage::DoChange(m_img, m_qtImg);
+	m_qtImg = ImageToQImage::DoChange(m_img);
 }
 
 void MainWindow::ShowImage()
@@ -74,14 +73,12 @@ void MainWindow::ShowImageInLabel(const QImage &img)
     ui->graphicsView->hide();
 }
 
-void MainWindow::ShowImageInGraphicsView(const QImage &img)
+void MainWindow::ShowImageInGraphicsView(const QImage &qImg)
 {
-    ui->graphicsView->resize(img.width(), img.height());
-
-
+    ui->graphicsView->resize(qImg.width(), qImg.height());
 
     auto graphicsScenc = new QGraphicsScene();
-    graphicsScenc->addPixmap(QPixmap::fromImage(img));
+    graphicsScenc->addPixmap(QPixmap::fromImage(qImg));
 
     ui->graphicsView->setScene(graphicsScenc);
     ui->graphicsView->adjustSize();
@@ -90,12 +87,22 @@ void MainWindow::ShowImageInGraphicsView(const QImage &img)
 }
 
 
+void MainWindow::ShowImageInGraphicsView(const Image& img)
+{
+	m_qtImg = ImageToQImage::DoChange(img);
+	ShowImageInGraphicsView(m_qtImg);
+}
+
+void MainWindow::ShowImageInGraphicsView()
+{
+	ShowImageInGraphicsView(m_img);
+}
+
 void MainWindow::on_actionOpen_triggered()
 {
 	auto fileOperator(std::make_unique<QImageFileOperator>());
-
-	m_openedFilename = QString::fromStdString(fileOperator->Open());
-    ReadImage(m_openedFilename);
+	Context::GetContext().SetCurrentFilename( QString::fromStdString(fileOperator->Open()));
+    ReadImage(Context::GetContext().GetCurrentFilename());
     ShowImage();
 }
 
@@ -103,8 +110,7 @@ void MainWindow::on_actionEdge_Detect_triggered()
 {
 	EdgeDetector edge;
 	edge.DoMagic(m_img);
-	ToQImage::DoChange(m_img, m_qtImg);
-    ShowImageInGraphicsView(m_qtImg);
+    ShowImageInGraphicsView();
 }
 
 void MainWindow::on_actionClose_triggered()
@@ -115,7 +121,7 @@ void MainWindow::on_actionClose_triggered()
 void MainWindow::on_actionSave_triggered()
 {
 	auto fileOperator(std::make_unique<QImageFileOperator>());
-	fileOperator->Save(m_img, m_openedFilename.toStdString());
+	fileOperator->Save(m_img, Context::GetContext().GetCurrentFilename().toStdString());
 }
 
 void MainWindow::on_actionSave_As_triggered()
@@ -128,13 +134,13 @@ void MainWindow::on_actionLeft_90_triggered()
 {
 	QImageRotator rotate;
 	rotate.Rotate(m_qtImg,Context::CtxLeftRotateDegree);
-	ShowImageInGraphicsView(m_qtImg);
+	ShowImageInGraphicsView();
 }
 
 void MainWindow::on_actionRight_90_triggered()
 {
 	QImageRotator rotate;
 	rotate.Rotate(m_qtImg, Context::CtxRightRotateDegree);
-	ShowImageInGraphicsView(m_qtImg);
+	ShowImageInGraphicsView();
 }
 

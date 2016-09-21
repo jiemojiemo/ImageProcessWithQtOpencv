@@ -1,7 +1,7 @@
 #include "FileOperator/QImageFileOperator.h"
 
 #include "DataStructure/Image.h"
-#include "ImageChanger/ToQImage.h"
+#include "ImageChanger/ImageToQImage.h"
 #include <QImage>
 #include <QString>
 #include <QFileDialog>
@@ -22,7 +22,7 @@ bool QImageFileOperator::Save(const Image& img, const std::string& filename)
 	assert(filename != "");
 
 	QImage qImg;
-	ToQImage::DoChange(img, qImg);
+	qImg = ImageToQImage::DoChange(img);
 	qImg.save(QString::fromStdString(filename));
 	return true;
 }
@@ -30,7 +30,7 @@ bool QImageFileOperator::Save(const Image& img, const std::string& filename)
 bool QImageFileOperator::SaveAs(const Image& img)
 {
 	QImage qImg;
-	ToQImage::DoChange(img, qImg);
+	qImg = ImageToQImage::DoChange(img);
 
 	QString filename = QFileDialog::getSaveFileName(nullptr,
 		QObject::tr("Save Image"),

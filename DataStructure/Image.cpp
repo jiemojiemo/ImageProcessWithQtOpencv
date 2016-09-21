@@ -2,6 +2,7 @@
 
 //Openvc
 #include "imgproc.hpp"
+#include "highgui.hpp"
 
 Image::Image(const cv::Mat & mat):
 	m_mat(mat)
@@ -20,5 +21,5 @@ Image & Image::operator=(const cv::Mat & mat)
 
 void Image::SetCVMat(const cv::Mat & mat)
 {
-	cv::cvtColor(mat, m_mat, CV_BGR2RGB);
+	mat.copyTo(m_mat);
 }

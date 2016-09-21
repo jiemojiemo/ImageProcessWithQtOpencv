@@ -39,12 +39,13 @@ private:
 
     void ShowImage();
     void ShowImageInLabel(const QImage& img);
-    void ShowImageInGraphicsView(const QImage& img);
+    void ShowImageInGraphicsView(const QImage& qImg);
+	void ShowImageInGraphicsView(const Image& img);
+	void ShowImageInGraphicsView();
 private:
     Ui::MainWindow *ui;
     QImage m_qtImg;
 	Image m_img;
-	QString m_openedFilename;
 };
 
 #endif // MAINWINDOW_H

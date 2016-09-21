@@ -92,11 +92,14 @@
     <ClCompile Include="Context\Context.cpp">
       <Filter>Context</Filter>
     </ClCompile>
-    <ClCompile Include="ImageChanger\ToQImage.cpp">
-      <Filter>ImageChanger</Filter>
-    </ClCompile>
     <ClCompile Include="ImageRotator\QImageRotator.cpp">
       <Filter>ImageRotator</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageChanger\cvmatandqimage.cpp">
+      <Filter>ImageChanger</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageChanger\ImageToQImage.cpp">
+      <Filter>ImageChanger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,14 +134,17 @@
     <ClInclude Include="Context\Context.h">
       <Filter>Context</Filter>
     </ClInclude>
-    <ClInclude Include="ImageChanger\ToQImage.h">
-      <Filter>ImageChanger</Filter>
-    </ClInclude>
     <ClInclude Include="FileOperator\ImageFileOperator.h">
       <Filter>FileOperator</Filter>
     </ClInclude>
     <ClInclude Include="ImageRotator\QImageRotator.h">
       <Filter>ImageRotator</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageChanger\cvmatandqimage.h">
+      <Filter>ImageChanger</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageChanger\ImageToQImage.h">
+      <Filter>ImageChanger</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
