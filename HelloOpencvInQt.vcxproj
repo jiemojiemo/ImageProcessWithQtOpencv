@@ -151,6 +151,7 @@
     <ClCompile Include="ImageChanger\ImageToQImage.cpp" />
     <ClCompile Include="ImageRotator\QImageRotator.cpp" />
     <ClCompile Include="Magic\EdgeDetector.cpp" />
+    <ClCompile Include="Magic\GrayScaler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
   </ItemGroup>
@@ -163,6 +164,7 @@
     <ClInclude Include="ImageChanger\ImageToQImage.h" />
     <ClInclude Include="ImageRotator\QImageRotator.h" />
     <ClInclude Include="Magic\EdgeDetector.h" />
+    <ClInclude Include="Magic\GrayScaler.h" />
     <ClInclude Include="Magic\Magician.h" />
     <CustomBuild Include="mainwindow.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG  "-I." "-I.\opencv\include" "-I.\opencv\include\opencv" "-I.\opencv\include\opencv2" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc2015" "-I.\GeneratedFiles"</Command>
@@ -194,7 +196,7 @@
   <ImportGroup Label="ExtensionTargets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" Qt5Version_x0020_x64="5.70" />
+      <UserProperties UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" Qt5Version_x0020_x64="5.7" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
