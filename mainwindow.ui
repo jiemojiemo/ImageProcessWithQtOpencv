@@ -61,6 +61,7 @@
      <string>Process</string>
     </property>
     <addaction name="actionEdge_Detect"/>
+    <addaction name="actionGray_Scale"/>
    </widget>
    <widget class="QMenu" name="menuRotate">
     <property name="title">
@@ -115,6 +116,11 @@
   <action name="actionRight_90">
    <property name="text">
     <string>right 90</string>
+   </property>
+  </action>
+  <action name="actionGray_Scale">
+   <property name="text">
+    <string>Gray Scale</string>
    </property>
   </action>
  </widget>

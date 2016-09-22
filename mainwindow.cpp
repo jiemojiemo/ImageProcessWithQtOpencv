@@ -5,6 +5,7 @@
 #include "imgproc.hpp"
 
 #include "Magic/EdgeDetector.h"
+#include "Magic/GrayScaler.h"
 #include "ImageChanger/ImageToQImage.h"
 #include "FileOperator/ImageFileOperator.h"
 #include "FileOperator/QImageFileOperator.h"
@@ -141,6 +142,13 @@ void MainWindow::on_actionRight_90_triggered()
 {
 	QImageRotator rotate;
 	rotate.Rotate(m_qtImg, Context::CtxRightRotateDegree);
+	ShowImageInGraphicsView();
+}
+
+void MainWindow::on_actionGray_Scale_triggered()
+{
+	GrayScaler grayScaler;
+	grayScaler.DoMagic(m_img);
 	ShowImageInGraphicsView();
 }
 

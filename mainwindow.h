@@ -33,6 +33,8 @@ private slots:
 
 	void on_actionRight_90_triggered();
 
+	void on_actionGray_Scale_triggered();
+
 private:
     QString GetFilename();
     void ReadImage(const QString& filename);
