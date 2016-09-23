@@ -104,6 +104,9 @@
     <ClCompile Include="Magic\GrayScaler.cpp">
       <Filter>Magic</Filter>
     </ClCompile>
+    <ClCompile Include="Magic\OilPainter.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -150,6 +153,9 @@
       <Filter>ImageChanger</Filter>
     </ClInclude>
     <ClInclude Include="Magic\GrayScaler.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\OilPainter.h">
       <Filter>Magic</Filter>
     </ClInclude>
   </ItemGroup>

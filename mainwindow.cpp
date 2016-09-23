@@ -6,6 +6,7 @@
 
 #include "Magic/EdgeDetector.h"
 #include "Magic/GrayScaler.h"
+#include "Magic/OilPainter.h"
 #include "ImageChanger/ImageToQImage.h"
 #include "FileOperator/ImageFileOperator.h"
 #include "FileOperator/QImageFileOperator.h"
@@ -107,13 +108,6 @@ void MainWindow::on_actionOpen_triggered()
     ShowImage();
 }
 
-void MainWindow::on_actionEdge_Detect_triggered()
-{
-	EdgeDetector edge;
-	edge.DoMagic(m_img);
-    ShowImageInGraphicsView();
-}
-
 void MainWindow::on_actionClose_triggered()
 {
     ui->graphicsView->scene()->clear();
@@ -145,10 +139,24 @@ void MainWindow::on_actionRight_90_triggered()
 	ShowImageInGraphicsView();
 }
 
+void MainWindow::on_actionEdge_Detect_triggered()
+{
+	EdgeDetector edge;
+	edge.DoMagic(m_img);
+	ShowImageInGraphicsView();
+}
+
 void MainWindow::on_actionGray_Scale_triggered()
 {
 	GrayScaler grayScaler;
 	grayScaler.DoMagic(m_img);
+	ShowImageInGraphicsView();
+}
+
+void MainWindow::on_actionOil_triggered()
+{
+	OilPainter oilPainter;
+	oilPainter.DoMagic(m_img);
 	ShowImageInGraphicsView();
 }
 

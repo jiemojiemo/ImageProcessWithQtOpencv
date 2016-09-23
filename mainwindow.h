@@ -19,21 +19,18 @@ public:
     ~MainWindow();
 
 private slots:
+	//File
     void on_actionOpen_triggered();
-
-    void on_actionEdge_Detect_triggered();
-
     void on_actionClose_triggered();
-
 	void on_actionSave_triggered();
-
 	void on_actionSave_As_triggered();
-
+	//Rotate
 	void on_actionLeft_90_triggered();
-
 	void on_actionRight_90_triggered();
-
+	//Process
+    void on_actionEdge_Detect_triggered();
 	void on_actionGray_Scale_triggered();
+	void on_actionOil_triggered();
 
 private:
     QString GetFilename();
