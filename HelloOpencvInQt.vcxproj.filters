@@ -108,6 +108,7 @@
       <Filter>Magic</Filter>
     </ClCompile>
     <ClCompile Include="Magic\MagicianFactory.cpp">
+    <ClCompile Include="Magic\EdgeDetector2.cpp">
       <Filter>Magic</Filter>
     </ClCompile>
   </ItemGroup>
@@ -165,6 +166,7 @@
       <Filter>Magic</Filter>
     </ClInclude>
     <ClInclude Include="Magic\MagicianRegister.h">
+    <ClInclude Include="Magic\EdgeDetector2.h">
       <Filter>Magic</Filter>
     </ClInclude>
   </ItemGroup>
