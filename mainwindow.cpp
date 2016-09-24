@@ -7,6 +7,7 @@
 #include "Magic/EdgeDetector.h"
 #include "Magic/GrayScaler.h"
 #include "Magic/OilPainter.h"
+#include "Magic/MagicianFactory.h"
 #include "ImageChanger/ImageToQImage.h"
 #include "FileOperator/ImageFileOperator.h"
 #include "FileOperator/QImageFileOperator.h"
@@ -20,6 +21,14 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QMatrix>
+
+#define DO_PROCESS_AND_SHOW(className)			\
+auto magician(MagicianFactory::SharedMagicianFactory().GetMagicianByName(#className));\
+if (magician != nullptr)\
+{\
+	magician->DoMagic(m_img);\
+	ShowImageInGraphicsView();\
+}
 
 void DoRotate(QImage& qImg, int rotate)
 {
@@ -115,7 +124,7 @@ void MainWindow::on_actionClose_triggered()
 
 void MainWindow::on_actionSave_triggered()
 {
-	auto fileOperator(std::make_unique<QImageFileOperator>());
+	std::unique_ptr<ImageFileOperator> fileOperator(std::make_unique<QImageFileOperator>());
 	fileOperator->Save(m_img, Context::GetContext().GetCurrentFilename().toStdString());
 }
 
@@ -141,22 +150,16 @@ void MainWindow::on_actionRight_90_triggered()
 
 void MainWindow::on_actionEdge_Detect_triggered()
 {
-	EdgeDetector edge;
-	edge.DoMagic(m_img);
-	ShowImageInGraphicsView();
+	DO_PROCESS_AND_SHOW(EdgeDetector);
 }
 
 void MainWindow::on_actionGray_Scale_triggered()
 {
-	GrayScaler grayScaler;
-	grayScaler.DoMagic(m_img);
-	ShowImageInGraphicsView();
+	DO_PROCESS_AND_SHOW(GrayScaler);
 }
 
 void MainWindow::on_actionOil_triggered()
 {
-	OilPainter oilPainter;
-	oilPainter.DoMagic(m_img);
-	ShowImageInGraphicsView();
+	DO_PROCESS_AND_SHOW(OilPainter);
 }
 

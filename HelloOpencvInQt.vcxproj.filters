@@ -107,6 +107,9 @@
     <ClCompile Include="Magic\OilPainter.cpp">
       <Filter>Magic</Filter>
     </ClCompile>
+    <ClCompile Include="Magic\MagicianFactory.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -156,6 +159,12 @@
       <Filter>Magic</Filter>
     </ClInclude>
     <ClInclude Include="Magic\OilPainter.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\MagicianFactory.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\MagicianRegister.h">
       <Filter>Magic</Filter>
     </ClInclude>
   </ItemGroup>

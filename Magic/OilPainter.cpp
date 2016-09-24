@@ -4,6 +4,8 @@
 
 #include <vector>
 
+REGISTER_INTO_FACTORY(OilPainter);
+
 void OilProcess(cv::Mat& im)
 {
 	using namespace cv;

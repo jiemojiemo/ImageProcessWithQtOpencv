@@ -10,12 +10,12 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
+	QApplication a(argc, argv);
+	MainWindow w;
 
-    QTextCodec::setCodecForLocale(QTextCodec::codecForName("GBK"));
+	QTextCodec::setCodecForLocale(QTextCodec::codecForName("GBK"));
 
-    w.show();
+	w.show();
 
-    return a.exec();
+	return a.exec();
 }

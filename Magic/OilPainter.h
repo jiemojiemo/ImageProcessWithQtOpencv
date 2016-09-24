@@ -10,7 +10,7 @@ class OilPainter
 
 public:
 	OilPainter() = default;
-	~OilPainter() = default;
+	virtual ~OilPainter() = default;
 
 	virtual void DoMagic(Image& img);
 };

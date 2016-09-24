@@ -7,7 +7,9 @@ class EdgeDetector : public Magician
 	DISALLOW_COPY_AND_ASSIGN(EdgeDetector);
 public:
 	EdgeDetector() = default;
-	~EdgeDetector() = default;
+	virtual ~EdgeDetector() = default;
 
 	virtual void DoMagic(Image& img);
 };
+
+
