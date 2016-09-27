@@ -22,13 +22,16 @@
 #include <QMessageBox>
 #include <QMatrix>
 
-#define DO_PROCESS_AND_SHOW(className)			\
-auto magician(MagicianFactory::SharedMagicianFactory().GetMagicianByName(#className));\
+#define GET_CLASS_DO_MAGIC_THEN_SHOW(className)			\
+auto magician(MagicianFactory::SharedMagicianFactory().GetMagicianByName(className));\
 if (magician != nullptr)\
 {\
 	magician->DoMagic(m_img);\
 	ShowImageInGraphicsView();\
 }
+#define GET_CLASS_STR_NAME Context::GetContext().GetMagicanNameFromFunctionName(__FUNCTION__)
+
+#define DO_PROCESS_AND_SHOW GET_CLASS_DO_MAGIC_THEN_SHOW(GET_CLASS_STR_NAME)
 
 void DoRotate(QImage& qImg, int rotate)
 {
@@ -42,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+	Context::GetContext();
 }
 
 MainWindow::~MainWindow()
@@ -150,16 +153,19 @@ void MainWindow::on_actionRight_90_triggered()
 
 void MainWindow::on_actionEdge_Detect_triggered()
 {
-	DO_PROCESS_AND_SHOW(EdgeDetector);
+	DO_PROCESS_AND_SHOW;
+
 }
 
 void MainWindow::on_actionGray_Scale_triggered()
 {
-	DO_PROCESS_AND_SHOW(GrayScaler);
+	//GET_CLASS_DO_MAGIC(GrayScaler);
+	DO_PROCESS_AND_SHOW;
 }
 
 void MainWindow::on_actionOil_triggered()
 {
-	DO_PROCESS_AND_SHOW(OilPainter);
+	//GET_CLASS_DO_MAGIC(OilPainter);
+	DO_PROCESS_AND_SHOW;
 }
 

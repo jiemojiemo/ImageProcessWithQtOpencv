@@ -5,6 +5,9 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/opencv.hpp"
+
+REGISTER_INTO_FACTORY(EdgeDetector2);
+
 void ContourorProc(cv::Mat& mat)
 {
 	cv::cvtColor(mat, mat, CV_BGR2GRAY);

@@ -1,0 +1,5 @@
+{
+    "MainWindow::on_actionEdge_Detect_triggered": "EdgeDetector",
+    "MainWindow::on_actionGray_Scale_triggered":"GrayScaler",
+    "MainWindow::on_actionOil_triggered":"OilPainter"
+}

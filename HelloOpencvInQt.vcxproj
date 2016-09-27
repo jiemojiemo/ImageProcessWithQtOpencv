@@ -150,6 +150,7 @@
     <ClCompile Include="ImageChanger\cvmatandqimage.cpp" />
     <ClCompile Include="ImageChanger\ImageToQImage.cpp" />
     <ClCompile Include="ImageRotator\QImageRotator.cpp" />
+    <ClCompile Include="Json\MRapidJson.cpp" />
     <ClCompile Include="Magic\EdgeDetector2.cpp" />
     <ClCompile Include="Magic\EdgeDetector.cpp" />
     <ClCompile Include="Magic\GrayScaler.cpp" />
@@ -166,6 +167,8 @@
     <ClInclude Include="ImageChanger\cvmatandqimage.h" />
     <ClInclude Include="ImageChanger\ImageToQImage.h" />
     <ClInclude Include="ImageRotator\QImageRotator.h" />
+    <ClInclude Include="Json\MagicJson.h" />
+    <ClInclude Include="Json\MRapidJson.h" />
     <ClInclude Include="Magic\EdgeDetector2.h" />
     <ClInclude Include="Magic\EdgeDetector.h" />
     <ClInclude Include="Magic\GrayScaler.h" />

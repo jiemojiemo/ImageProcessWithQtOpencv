@@ -66,6 +66,9 @@
     <Filter Include="ImageRotator">
       <UniqueIdentifier>{33f0d78b-a87b-4233-a007-cfedb250e650}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Json">
+      <UniqueIdentifier>{6be31961-4b8c-40f8-8542-5ddfae41d517}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -112,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="Magic\EdgeDetector2.cpp">
       <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="Json\MRapidJson.cpp">
+      <Filter>Json</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +178,12 @@
     </ClInclude>
     <ClInclude Include="Magic\EdgeDetector2.h">
       <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\MagicJson.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\MRapidJson.h">
+      <Filter>Json</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
