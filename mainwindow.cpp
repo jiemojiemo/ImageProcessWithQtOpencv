@@ -27,7 +27,7 @@ auto magician(MagicianFactory::SharedMagicianFactory().GetMagicianByName(classNa
 if (magician != nullptr)\
 {\
 	magician->DoMagic(m_img);\
-	ShowImageInGraphicsView();\
+	ShowImageInGraphicsView(m_img);\
 }
 #define GET_CLASS_STR_NAME Context::GetContext().GetMagicanNameFromFunctionName(__FUNCTION__)
 
@@ -71,22 +71,6 @@ void MainWindow::ReadImage(const QString& filename)
 	m_qtImg = ImageToQImage::DoChange(m_img);
 }
 
-void MainWindow::ShowImage()
-{
-
-    //ShowImageInLabel(m_qtImg);
-    ShowImageInGraphicsView(m_qtImg);
-}
-
-void MainWindow::ShowImageInLabel(const QImage &img)
-{
-    ui->label->setPixmap(QPixmap::fromImage(img));
-    ui->label->resize(ui->label->pixmap()->size());
-
-    ui->label->show();
-    ui->graphicsView->hide();
-}
-
 void MainWindow::ShowImageInGraphicsView(const QImage &qImg)
 {
     ui->graphicsView->resize(qImg.width(), qImg.height());
@@ -107,17 +91,13 @@ void MainWindow::ShowImageInGraphicsView(const Image& img)
 	ShowImageInGraphicsView(m_qtImg);
 }
 
-void MainWindow::ShowImageInGraphicsView()
-{
-	ShowImageInGraphicsView(m_img);
-}
 
 void MainWindow::on_actionOpen_triggered()
 {
 	auto fileOperator(std::make_unique<QImageFileOperator>());
 	Context::GetContext().SetCurrentFilename( QString::fromStdString(fileOperator->Open()));
     ReadImage(Context::GetContext().GetCurrentFilename());
-    ShowImage();
+	ShowImageInGraphicsView(m_qtImg);
 }
 
 void MainWindow::on_actionClose_triggered()
@@ -141,14 +121,14 @@ void MainWindow::on_actionLeft_90_triggered()
 {
 	QImageRotator rotate;
 	rotate.Rotate(m_qtImg,Context::CtxLeftRotateDegree);
-	ShowImageInGraphicsView();
+	ShowImageInGraphicsView(m_qtImg);
 }
 
 void MainWindow::on_actionRight_90_triggered()
 {
 	QImageRotator rotate;
 	rotate.Rotate(m_qtImg, Context::CtxRightRotateDegree);
-	ShowImageInGraphicsView();
+	ShowImageInGraphicsView(m_qtImg);
 }
 
 void MainWindow::on_actionEdge_Detect_triggered()

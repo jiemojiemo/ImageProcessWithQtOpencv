@@ -36,11 +36,8 @@ private:
     QString GetFilename();
     void ReadImage(const QString& filename);
 
-    void ShowImage();
-    void ShowImageInLabel(const QImage& img);
     void ShowImageInGraphicsView(const QImage& qImg);
 	void ShowImageInGraphicsView(const Image& img);
-	void ShowImageInGraphicsView();
 private:
     Ui::MainWindow *ui;
     QImage m_qtImg;
