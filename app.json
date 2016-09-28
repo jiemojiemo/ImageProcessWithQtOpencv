@@ -1,5 +1,6 @@
 {
-    "MainWindow::on_actionEdge_Detect_triggered": "EdgeDetector",
+    "MainWindow::on_actionEdge_Detect_triggered": "EdgeDetector2",
     "MainWindow::on_actionGray_Scale_triggered":"GrayScaler",
-    "MainWindow::on_actionOil_triggered":"OilPainter"
+    "MainWindow::on_actionOil_triggered":"OilPainter",
+    "MainWindow::on_actionContour_triggered":"Contourer2"
 }

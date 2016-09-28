@@ -9,7 +9,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
-
+REGISTER_INTO_FACTORY(Contourer2);
 //http://blog.sina.com.cn/s/blog_76088a1f0101dis4.html
 //http://blog.csdn.net/felix86/article/details/38121959
 int  Contourer2Proc(cv::Mat& mat)

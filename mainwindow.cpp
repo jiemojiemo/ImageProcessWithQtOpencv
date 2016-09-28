@@ -149,3 +149,8 @@ void MainWindow::on_actionOil_triggered()
 	DO_PROCESS_AND_SHOW;
 }
 
+void MainWindow::on_actionContour_triggered()
+{
+	DO_PROCESS_AND_SHOW;
+}
+

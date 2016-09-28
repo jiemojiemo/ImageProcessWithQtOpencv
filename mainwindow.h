@@ -31,6 +31,7 @@ private slots:
     void on_actionEdge_Detect_triggered();
 	void on_actionGray_Scale_triggered();
 	void on_actionOil_triggered();
+	void on_actionContour_triggered();
 
 private:
     QString GetFilename();

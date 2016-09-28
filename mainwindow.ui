@@ -63,6 +63,7 @@
     <addaction name="actionEdge_Detect"/>
     <addaction name="actionGray_Scale"/>
     <addaction name="actionOil"/>
+    <addaction name="actionContour"/>
    </widget>
    <widget class="QMenu" name="menuRotate">
     <property name="title">
@@ -127,6 +128,11 @@
   <action name="actionOil">
    <property name="text">
     <string>Oil</string>
+   </property>
+  </action>
+  <action name="actionContour">
+   <property name="text">
+    <string>Contour</string>
    </property>
   </action>
  </widget>
