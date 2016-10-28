@@ -4,9 +4,16 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <QTextCodec>
+#include <iostream>
+
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
 
 #pragma comment(lib, "./opencv/x64/vc14/lib/opencv_world310.lib")
 #pragma comment(lib, "./opencv/x64/vc14/lib/opencv_world310d.lib")
+
+
 
 int main(int argc, char *argv[])
 {
@@ -19,3 +26,5 @@ int main(int argc, char *argv[])
 
 	return a.exec();
 }
+
+

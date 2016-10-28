@@ -151,12 +151,14 @@
     <ClCompile Include="ImageChanger\ImageToQImage.cpp" />
     <ClCompile Include="ImageRotator\QImageRotator.cpp" />
     <ClCompile Include="Json\MRapidJson.cpp" />
+    <ClCompile Include="Magic\AntiClockWiseRotator.cpp" />
     <ClCompile Include="Magic\Contourer2.cpp" />
     <ClCompile Include="Magic\EdgeDetector2.cpp" />
     <ClCompile Include="Magic\EdgeDetector.cpp" />
     <ClCompile Include="Magic\GrayScaler.cpp" />
     <ClCompile Include="Magic\MagicianFactory.cpp" />
     <ClCompile Include="Magic\OilPainter.cpp" />
+    <ClCompile Include="Magic\ClockWiseRotator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
   </ItemGroup>
@@ -170,6 +172,7 @@
     <ClInclude Include="ImageRotator\QImageRotator.h" />
     <ClInclude Include="Json\MagicJson.h" />
     <ClInclude Include="Json\MRapidJson.h" />
+    <ClInclude Include="Magic\AntiClockWiseRotator.h" />
     <ClInclude Include="Magic\Contourer2.h" />
     <ClInclude Include="Magic\EdgeDetector2.h" />
     <ClInclude Include="Magic\EdgeDetector.h" />
@@ -178,6 +181,7 @@
     <ClInclude Include="Magic\MagicianFactory.h" />
     <ClInclude Include="Magic\MagicianRegister.h" />
     <ClInclude Include="Magic\OilPainter.h" />
+    <ClInclude Include="Magic\ClockWiseRotator.h" />
     <CustomBuild Include="mainwindow.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG  "-I." "-I.\opencv\include" "-I.\opencv\include\opencv" "-I.\opencv\include\opencv2" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc2015" "-I.\GeneratedFiles"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing mainwindow.h...</Message>

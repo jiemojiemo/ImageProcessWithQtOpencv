@@ -2,5 +2,7 @@
     "MainWindow::on_actionEdge_Detect_triggered": "EdgeDetector2",
     "MainWindow::on_actionGray_Scale_triggered":"GrayScaler",
     "MainWindow::on_actionOil_triggered":"OilPainter",
-    "MainWindow::on_actionContour_triggered":"Contourer2"
+    "MainWindow::on_actionContour_triggered":"Contourer2",
+    "MainWindow::on_actionLeft_90_triggered":"AntiClockWiseRotator",
+    "MainWindow::on_actionRight_90_triggered":"ClockWiseRotator"
 }

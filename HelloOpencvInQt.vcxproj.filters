@@ -122,6 +122,12 @@
     <ClCompile Include="Magic\Contourer2.cpp">
       <Filter>Magic</Filter>
     </ClCompile>
+    <ClCompile Include="Magic\ClockWiseRotator.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="Magic\AntiClockWiseRotator.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -189,6 +195,12 @@
       <Filter>Json</Filter>
     </ClInclude>
     <ClInclude Include="Magic\Contourer2.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\ClockWiseRotator.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\AntiClockWiseRotator.h">
       <Filter>Magic</Filter>
     </ClInclude>
   </ItemGroup>

@@ -11,6 +11,6 @@ public:
 	~ImageFileOperator() = default;
 
 	virtual std::string Open() = 0;
-	virtual bool Save(const Image& img, const std::string& filename) = 0;
-	virtual bool SaveAs(const Image& img) = 0;
+	virtual bool Save( const Image& img, const std::string& filename) = 0;
+	virtual bool SaveAs( const Image& img) = 0;
 };
