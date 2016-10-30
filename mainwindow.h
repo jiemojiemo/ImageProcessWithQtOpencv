@@ -24,6 +24,7 @@ private slots:
     void on_actionClose_triggered();
 	void on_actionSave_triggered();
 	void on_actionSave_As_triggered();
+	void on_actionBatching_triggered();
 	//Rotate
 	void on_actionLeft_90_triggered();
 	void on_actionRight_90_triggered();
@@ -39,6 +40,7 @@ private:
 
     void ShowImageInGraphicsView(const QImage& qImg);
 	void ShowImageInGraphicsView(const Image& img);
+	void ShowImage(const Image& img);
 private:
     Ui::MainWindow *ui;
     QImage m_qtImg;

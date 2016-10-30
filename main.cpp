@@ -2,6 +2,7 @@
 #include "cxcore.h"
 #include "highgui.h"
 #include "mainwindow.h"
+#include "batchwindow.hpp"
 #include <QApplication>
 #include <QTextCodec>
 #include <iostream>
@@ -19,11 +20,12 @@ int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 	MainWindow w;
-
+	//BatchWindow batchWin;
+	
 	QTextCodec::setCodecForLocale(QTextCodec::codecForName("GBK"));
 
 	w.show();
-
+	//batchWin.show();
 	return a.exec();
 }
 

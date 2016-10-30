@@ -10,6 +10,9 @@
 #include "Magic/MagicianFactory.h"
 #include "FileOperator/QImageFileOperator.h"
 #include "Context/Context.h"
+#include "iconwidget.h"
+
+#include "batchwindow.hpp"
 
 #include <memory>
 
@@ -18,6 +21,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QMatrix>
+#include <QGridLayout>
 
 #define GET_CLASS_DO_MAGIC_THEN_SHOW(className)			\
 auto magician(MagicianFactory::SharedMagicianFactory().GetMagicianByName(className));\
@@ -25,19 +29,13 @@ if (magician != nullptr)\
 {\
 	m_img.SetMag(magician);\
 	m_img.DoMagic();\
-	ShowImageInGraphicsView(m_img);\
+	ShowImage(m_img);\
 }
 
 #define GET_CLASS_STR_NAME Context::GetContext().GetMagicanNameFromFunctionName(__FUNCTION__)
 
 #define DO_PROCESS_AND_SHOW GET_CLASS_DO_MAGIC_THEN_SHOW(GET_CLASS_STR_NAME)
 
-void DoRotate(QImage& qImg, int rotate)
-{
-	QMatrix rotateMatrix;
-	rotateMatrix.rotate(rotate);
-	qImg = qImg.transformed(rotateMatrix);
-}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -67,20 +65,18 @@ void MainWindow::ReadImage(const QString& filename)
     QByteArray ba = filename.toLocal8Bit();
 	m_img = cv::imread(ba.data());
 
-
 }
 
 void MainWindow::ShowImageInGraphicsView(const QImage &qImg)
 {
-    ui->graphicsView->resize(qImg.width(), qImg.height());
+	ui->graphicsView->resize(qImg.width(), qImg.height());
 
-    auto graphicsScenc = new QGraphicsScene();
-    graphicsScenc->addPixmap(QPixmap::fromImage(qImg));
+	auto graphicsScenc = new QGraphicsScene();
+	graphicsScenc->addPixmap(QPixmap::fromImage(qImg));
 
-    ui->graphicsView->setScene(graphicsScenc);
-    ui->graphicsView->adjustSize();
-    ui->label->hide();
-    ui->graphicsView->show();
+	ui->graphicsView->setScene(graphicsScenc);
+	ui->graphicsView->adjustSize();
+	ui->graphicsView->show();
 }
 
 
@@ -90,12 +86,19 @@ void MainWindow::ShowImageInGraphicsView(const Image& img)
 }
 
 
+
+void MainWindow::ShowImage(const Image& img)
+{
+	ShowImageInGraphicsView(img);
+}
+
 void MainWindow::on_actionOpen_triggered()
 {
-	auto filename = GetFilename();
-	Context::GetContext().SetCurrentFilename(filename);
+	std::unique_ptr<ImageFileOperator> fileOperator(std::make_unique<QImageFileOperator>());
+	auto filename = fileOperator->Open();
+	Context::GetContext().SetCurrentFilename(QString::fromStdString(filename));
     ReadImage(Context::GetContext().GetCurrentFilename());
-	ShowImageInGraphicsView(m_img);
+	ShowImage(m_img);
 }
 
 void MainWindow::on_actionClose_triggered()
@@ -113,6 +116,16 @@ void MainWindow::on_actionSave_As_triggered()
 {
 	auto fileOperator(std::make_unique<QImageFileOperator>());
 	fileOperator->SaveAs(m_img);
+}
+
+void MainWindow::on_actionBatching_triggered()
+{
+	BatchWindow* batchWin = new BatchWindow(this);
+	batchWin->setWindowModality(Qt::ApplicationModal);
+
+	batchWin->show();
+	//this->hide();
+	//this->close();
 }
 
 void MainWindow::on_actionLeft_90_triggered()

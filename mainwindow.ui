@@ -14,24 +14,11 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>123</x>
-      <y>11</y>
-      <width>261</width>
-      <height>241</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>5</x>
-      <y>1</y>
+      <x>0</x>
+      <y>0</y>
       <width>381</width>
       <height>231</height>
      </rect>
@@ -55,6 +42,7 @@
     <addaction name="actionClose"/>
     <addaction name="actionSave"/>
     <addaction name="actionSave_As"/>
+    <addaction name="actionBatching"/>
    </widget>
    <widget class="QMenu" name="menuProcess">
     <property name="title">
@@ -133,6 +121,11 @@
   <action name="actionContour">
    <property name="text">
     <string>Contour</string>
+   </property>
+  </action>
+  <action name="actionBatching">
+   <property name="text">
+    <string>Batching</string>
    </property>
   </action>
  </widget>
