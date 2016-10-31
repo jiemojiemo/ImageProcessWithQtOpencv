@@ -1,7 +1,7 @@
 #include "Magic/MagicianFactory.h"
 #include "Magic/Magician.h"
 
-std::unique_ptr<Magician> MagicianFactory::GetMagicianByName(const std::string& magicianName)
+std::shared_ptr<Magician> MagicianFactory::GetMagicianByName(const std::string& magicianName)
 {
 	auto iter = m_classMap.find(magicianName);
 
@@ -10,7 +10,7 @@ std::unique_ptr<Magician> MagicianFactory::GetMagicianByName(const std::string& 
 	else
 	{
 		auto ptr = static_cast<Magician*>(iter->second());
-		std::unique_ptr<Magician> ret(ptr);
+		std::shared_ptr<Magician> ret(ptr);
 		return ret;
 	}
 }

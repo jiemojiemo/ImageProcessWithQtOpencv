@@ -125,7 +125,7 @@ void MainWindow::on_actionSave_As_triggered()
 void MainWindow::on_actionBatching_triggered()
 {
 	BatchWindow* batchWin = new BatchWindow(this);
-	batchWin->setWindowModality(Qt::ApplicationModal);
+	//batchWin->setWindowModality(Qt::ApplicationModal);
 
 	batchWin->show();
 	//this->hide();

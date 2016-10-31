@@ -3,8 +3,10 @@
 #include "ImageBox.h"
 #include "DataStructure/MImage.h"
 #include "FileOperator/QImageBatchFileOperator.h"
+#include "Magic/GrayScaler.h"
 
 #include <algorithm>
+
 
 int kCount = 0;
 BatchWindow::BatchWindow(QWidget * parent) : QMainWindow(parent) 
@@ -62,6 +64,16 @@ void BatchWindow::on_actionClear_All_triggered()
 	
 }
 
+void BatchWindow::on_actionGray_Scale_triggered()
+{
+	auto magician(MagicianFactory::SharedMagicianFactory().GetMagicianByName("GrayScaler"));
+	for (auto &iter : m_iconList)
+	{
+		iter->SetMag(magician);
+		iter->DoMagic();
+	}
+}
+
 void BatchWindow::RemoveIcon(IconWidget* removeItem)
 {
 	m_iconList.remove(removeItem);
@@ -72,7 +84,9 @@ void BatchWindow::RemoveIcon(IconWidget* removeItem)
 void BatchWindow::OpenImage(IconWidget* item)
 {
 	auto path = item->GetImagePath();
-
+	QImage img(path);
+	m_imgBox->setImage(item->GetQImage());
+	m_imgBox->show();
 }
 
 bool BatchWindow::IsExitFilePath(const std::string& imgPath)
@@ -90,10 +104,7 @@ void BatchWindow::AddImage(const std::string& imgPath)
 {
 	if (!IsExitFilePath(imgPath))
 	{
-		//auto pImg = new MImage(imgPath);
 		auto iconImg = new IconWidget(QString::fromStdString(imgPath), this);
-		//auto iconImg = new IconWidget(QString::fromStdString(imgPath), this);
-		//m_imgList.push_back(pImg);
 		m_iconList.push_back(iconImg);
 		m_layout->addWidget(iconImg, 0, kCount++);
 	}

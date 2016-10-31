@@ -6,7 +6,7 @@
 #include "imgproc.hpp"
 #include "highgui.hpp"
 
-MImage::MImage() :m_mag(nullptr)
+MImage::MImage() :Image()
 {
 
 }

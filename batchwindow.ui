@@ -55,7 +55,14 @@
     <addaction name="actionOpen_New_Image"/>
     <addaction name="actionClear_All"/>
    </widget>
+   <widget class="QMenu" name="menuProcess">
+    <property name="title">
+     <string>Process</string>
+    </property>
+    <addaction name="actionGray_Scale"/>
+   </widget>
    <addaction name="menuFile_F"/>
+   <addaction name="menuProcess"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen_New_Folder">
@@ -71,6 +78,11 @@
   <action name="actionClear_All">
    <property name="text">
     <string>Clear All</string>
+   </property>
+  </action>
+  <action name="actionGray_Scale">
+   <property name="text">
+    <string>Gray Scale</string>
    </property>
   </action>
  </widget>

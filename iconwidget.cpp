@@ -36,6 +36,21 @@ IconWidget::~IconWidget()
 	}
 }
 
+const QImage& IconWidget::GetQImage() const
+{
+	return m_img->GetQImage();
+}
+
+QImage& IconWidget::GetQImage()
+{
+	return m_img->GetQImage();
+}
+
+QString IconWidget::GetImagePath()
+{
+	return m_imgPath;
+}
+
 void IconWidget::enterEvent(QEvent *event)
 {
 	m_pushBut.setVisible(true);
@@ -59,6 +74,12 @@ void IconWidget::mouseReleaseEvent(QMouseEvent *event)
 void IconWidget::DoMagic()
 {
 	m_img->DoMagic();
+	UpdateBackgound();
+}
+
+void IconWidget::SetMag(std::shared_ptr<Magician>& val)
+{
+	m_img->SetMag(val);
 }
 
 void IconWidget::ClickCloseButton()
@@ -99,7 +120,7 @@ void IconWidget::SetUpConnect(QWidget* parent)
 {
 	connect(&m_pushBut, SIGNAL(clicked()), this, SLOT(ClickCloseButton()));
 	connect(this, SIGNAL(IconClose(IconWidget*)), parent, SLOT(RemoveIcon(IconWidget*)));
-	connect(this, SIGNAL(clicked(IconWidget*)), parent, SLOT(OpenImage(int)));
+	connect(this, SIGNAL(clicked(IconWidget*)), parent, SLOT(OpenImage(IconWidget*)));
 }
 
 void IconWidget::SetOpenHandCursor()

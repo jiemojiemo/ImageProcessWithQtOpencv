@@ -19,13 +19,19 @@ public:
 	IconWidget(const QString& path, QWidget *parent = 0);
 	//IconWidget(MImage* pImg, const QString& path,QWidget* parent = 0);
 	~IconWidget();
+
+	const QImage& GetQImage()const;
+	QImage& GetQImage();
+	QString GetImagePath();
+
+	virtual void DoMagic();
+	virtual void SetMag(std::shared_ptr<Magician>& val);
+
 	virtual void enterEvent(QEvent *event);
 	virtual void leaveEvent(QEvent *event);
 	virtual void mouseReleaseEvent(QMouseEvent *event);
 
-	virtual void DoMagic();
 
-	QString GetImagePath()const { return m_imgPath; }
 private slots:
 	void ClickCloseButton();
 

@@ -24,6 +24,9 @@ private slots:
 	void on_actionOpen_New_Image_triggered();
 	void on_actionClear_All_triggered();
 
+	//Process
+	void on_actionGray_Scale_triggered();
+
 	void RemoveIcon(IconWidget* removeItem);
 	void OpenImage(IconWidget* item);
 

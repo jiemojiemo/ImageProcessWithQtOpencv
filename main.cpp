@@ -3,6 +3,7 @@
 #include "highgui.h"
 #include "mainwindow.h"
 #include "batchwindow.hpp"
+#include "ImageBox.h"
 #include <QApplication>
 #include <QTextCodec>
 #include <iostream>
@@ -19,12 +20,14 @@
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	MainWindow w;
-	//BatchWindow batchWin;
-	
 	QTextCodec::setCodecForLocale(QTextCodec::codecForName("GBK"));
 
+
+	MainWindow w;
 	w.show();
+
+	//BatchWindow batchWin;
+	
 	//batchWin.show();
 	return a.exec();
 }

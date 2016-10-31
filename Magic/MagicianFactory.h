@@ -11,7 +11,7 @@ private:
 public:
 	virtual ~MagicianFactory() = default;
 
-	std::unique_ptr<Magician> GetMagicianByName(const std::string& magicianName);
+	std::shared_ptr<Magician> GetMagicianByName(const std::string& magicianName);
 	void RigisterMagician(const std::string& magicianName, CreateClass method);
 	static MagicianFactory& SharedMagicianFactory();
 private:
