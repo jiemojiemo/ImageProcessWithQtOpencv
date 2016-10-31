@@ -10,5 +10,5 @@ public:
 	GrayScaler() = default;
 	virtual ~GrayScaler() = default;
 
-	virtual void DoMagic(Image& img);
+	virtual void DoMagic(MImage& img);
 };

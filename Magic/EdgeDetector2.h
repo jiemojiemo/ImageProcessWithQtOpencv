@@ -9,5 +9,5 @@ public:
 	EdgeDetector2() = default;
 	~EdgeDetector2() = default;
 
-	virtual void DoMagic(Image& img);
+	virtual void DoMagic(MImage& img);
 };

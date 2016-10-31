@@ -62,8 +62,9 @@ void MainWindow::ReadImage(const QString& filename)
 	if (filename.isEmpty())
 		return;
 
-    QByteArray ba = filename.toLocal8Bit();
-	m_img = cv::imread(ba.data());
+	/* QByteArray ba = filename.toLocal8Bit();
+	 m_img = cv::imread(ba.data());*/
+	m_img = QImage(filename);
 
 }
 
@@ -80,14 +81,14 @@ void MainWindow::ShowImageInGraphicsView(const QImage &qImg)
 }
 
 
-void MainWindow::ShowImageInGraphicsView(const Image& img)
+void MainWindow::ShowImageInGraphicsView(const MImage& img)
 {
 	ShowImageInGraphicsView(img.GetQImage());
 }
 
 
 
-void MainWindow::ShowImage(const Image& img)
+void MainWindow::ShowImage(const MImage& img)
 {
 	ShowImageInGraphicsView(img);
 }
@@ -96,9 +97,12 @@ void MainWindow::on_actionOpen_triggered()
 {
 	std::unique_ptr<ImageFileOperator> fileOperator(std::make_unique<QImageFileOperator>());
 	auto filename = fileOperator->Open();
-	Context::GetContext().SetCurrentFilename(QString::fromStdString(filename));
-    ReadImage(Context::GetContext().GetCurrentFilename());
-	ShowImage(m_img);
+	if (!filename.empty())
+	{
+		Context::GetContext().SetCurrentFilename(QString::fromStdString(filename));
+		ReadImage(Context::GetContext().GetCurrentFilename());
+		ShowImage(m_img);
+	}
 }
 
 void MainWindow::on_actionClose_triggered()

@@ -1,6 +1,6 @@
 #include "Contourer2.h"
 
-#include "DataStructure/Image.h"
+#include "DataStructure/MImage.h"
 #include <opencv2\core.hpp>
 #include "opencv2/highgui.hpp"
 //#include "cv.h"
@@ -123,7 +123,7 @@ int  Contourer2Proc(cv::Mat& mat)
 #endif // 0
 
 }
-void Contourer2::DoMagic(Image & img)
+void Contourer2::DoMagic(MImage & img)
 {
 	Contourer2Proc(img.GetMat());
 }

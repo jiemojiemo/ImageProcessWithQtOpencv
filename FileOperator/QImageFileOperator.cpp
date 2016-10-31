@@ -1,6 +1,6 @@
 #include "FileOperator/QImageFileOperator.h"
 
-#include "DataStructure/Image.h"
+#include "DataStructure/MImage.h"
 
 #include <QImage>
 #include <QString>
@@ -17,7 +17,7 @@ std::string QImageFileOperator::Open()
 	return filename.toStdString();
 }
 
-bool QImageFileOperator::Save( const Image& img, const std::string& filename)
+bool QImageFileOperator::Save( const MImage& img, const std::string& filename)
 {
 	assert(filename != "");
 
@@ -26,7 +26,7 @@ bool QImageFileOperator::Save( const Image& img, const std::string& filename)
 	return true;
 }
 
-bool QImageFileOperator::SaveAs( const Image& img)
+bool QImageFileOperator::SaveAs( const MImage& img)
 {
 	QImage qImg(img.GetQImage());
 

@@ -9,5 +9,5 @@ public:
 	Contourer2() = default;
 	~Contourer2() = default;
 
-	virtual void DoMagic(Image& img);
+	virtual void DoMagic(MImage& img);
 };

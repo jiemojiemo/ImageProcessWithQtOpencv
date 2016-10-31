@@ -1,6 +1,6 @@
 #include "EdgeDetector2.h"
 #include "imgproc.hpp"
-#include "DataStructure/Image.h"
+#include "DataStructure/MImage.h"
 
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -18,7 +18,7 @@ void ContourorProc(cv::Mat& mat)
 	mat = contours;
 }
 
-void EdgeDetector2::DoMagic(Image& img)
+void EdgeDetector2::DoMagic(MImage& img)
 {
 	ContourorProc(img.GetMat());
 }

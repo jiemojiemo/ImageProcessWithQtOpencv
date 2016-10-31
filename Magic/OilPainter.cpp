@@ -1,6 +1,6 @@
 #include "Magic/OilPainter.h"
 #include "imgproc.hpp"
-#include "DataStructure/Image.h"
+#include "DataStructure/MImage.h"
 
 #include <vector>
 
@@ -55,7 +55,7 @@ void OilProcess(cv::Mat& im)
 	im = dst;
 }
 
-void OilPainter::DoMagic(Image& img)
+void OilPainter::DoMagic(MImage& img)
 {
 	OilProcess(img.GetMat());
 }

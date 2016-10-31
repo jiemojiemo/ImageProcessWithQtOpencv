@@ -4,7 +4,7 @@
 #include "common/common.h"
 #include "Magic/MagicianRegister.h"
 
-class Image;
+class MImage;
 class Magician
 {
 	DISALLOW_COPY_AND_ASSIGN(Magician);
@@ -12,7 +12,7 @@ public:
 	Magician() = default;
 	virtual ~Magician() = default;
 
-	virtual void DoMagic(Image& img) = 0;
+	virtual void DoMagic(MImage& img) = 0;
 
 };
 //#define REGISTER_CAT(className) className##Factoory

@@ -12,5 +12,5 @@ public:
 	OilPainter() = default;
 	virtual ~OilPainter() = default;
 
-	virtual void DoMagic(Image& img);
+	virtual void DoMagic(MImage& img);
 };

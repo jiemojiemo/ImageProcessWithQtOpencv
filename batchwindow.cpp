@@ -1,5 +1,7 @@
 ﻿#include "batchwindow.hpp"
 #include "iconwidget.h"
+#include "ImageBox.h"
+#include "DataStructure/MImage.h"
 #include "FileOperator/QImageBatchFileOperator.h"
 
 #include <algorithm>
@@ -7,8 +9,10 @@
 int kCount = 0;
 BatchWindow::BatchWindow(QWidget * parent) : QMainWindow(parent) 
 {
-	m_layout = new QGridLayout;
-	m_containWidget = new QWidget;
+	m_layout = new QGridLayout(this);
+	m_containWidget = new QWidget(this);
+	m_imgBox = new ImageBox(this);
+	m_imgBox->setMode(ImageBox::AUTO_SIZE);
 
 	ui.setupUi(this);
 
@@ -20,7 +24,7 @@ BatchWindow::BatchWindow(QWidget * parent) : QMainWindow(parent)
 
 BatchWindow::~BatchWindow() 
 {
-	
+
 }
 
 void BatchWindow::on_actionOpen_New_Folder_triggered()
@@ -52,6 +56,7 @@ void BatchWindow::on_actionClear_All_triggered()
 	for (auto &iter : m_iconList)
 	{
 		iter->close();
+		delete iter;
 	}
 	m_iconList.clear();
 	
@@ -61,7 +66,13 @@ void BatchWindow::RemoveIcon(IconWidget* removeItem)
 {
 	m_iconList.remove(removeItem);
 	m_layout->removeWidget(removeItem);
-	int count = m_layout->count();
+	delete removeItem;
+}
+
+void BatchWindow::OpenImage(IconWidget* item)
+{
+	auto path = item->GetImagePath();
+
 }
 
 bool BatchWindow::IsExitFilePath(const std::string& imgPath)
@@ -79,7 +90,10 @@ void BatchWindow::AddImage(const std::string& imgPath)
 {
 	if (!IsExitFilePath(imgPath))
 	{
+		//auto pImg = new MImage(imgPath);
 		auto iconImg = new IconWidget(QString::fromStdString(imgPath), this);
+		//auto iconImg = new IconWidget(QString::fromStdString(imgPath), this);
+		//m_imgList.push_back(pImg);
 		m_iconList.push_back(iconImg);
 		m_layout->addWidget(iconImg, 0, kCount++);
 	}

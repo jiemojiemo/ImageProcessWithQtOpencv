@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "DataStructure/Image.h"
+#include "DataStructure/MImage.h"
 
 #include "highgui.hpp"
 #include <QMainWindow>
@@ -39,12 +39,12 @@ private:
     void ReadImage(const QString& filename);
 
     void ShowImageInGraphicsView(const QImage& qImg);
-	void ShowImageInGraphicsView(const Image& img);
-	void ShowImage(const Image& img);
+	void ShowImageInGraphicsView(const MImage& img);
+	void ShowImage(const MImage& img);
 private:
     Ui::MainWindow *ui;
     QImage m_qtImg;
-	Image m_img;
+	MImage m_img;
 };
 
 #endif // MAINWINDOW_H

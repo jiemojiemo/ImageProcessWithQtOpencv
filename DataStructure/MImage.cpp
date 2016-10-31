@@ -1,4 +1,4 @@
-#include "DataStructure\Image.h"
+#include "DataStructure\MImage.h"
 #include "ImageChanger\cvmatandqimage.h"
 #include "Magic/Magician.h"
 
@@ -6,12 +6,21 @@
 #include "imgproc.hpp"
 #include "highgui.hpp"
 
-Image::Image() :m_mag(nullptr)
+MImage::MImage() :m_mag(nullptr)
 {
 
 }
 
-void Image::DoMagic()
+MImage::MImage(const std::string& path): MImage(QString::fromStdString(path))
+{
+}
+
+MImage::MImage(const QString& path):m_qImg(path)
+{
+	m_mat = QtOcv::image2Mat(m_qImg);
+}
+
+void MImage::DoMagic()
 {
 	if (m_mag != nullptr)
 	{
@@ -21,20 +30,20 @@ void Image::DoMagic()
 	}
 }
 
-void Image::SetMat(const cv::Mat& val)
+void MImage::SetMat(const cv::Mat& val)
 {
 	m_mat = val;
 	m_qImg = QtOcv::mat2Image(m_mat);
 }
 
 
-void Image::SetQImage(const QImage& qImg)
+void MImage::SetQImage(const QImage& qImg)
 {
 	m_qImg = qImg;
 	m_mat = QtOcv::image2Mat(m_qImg);
 }
 
-void Image::UpdateImage()
+void MImage::UpdateImage()
 {
 	if (m_isMat)
 		m_qImg = QtOcv::mat2Image(m_mat);
@@ -42,7 +51,7 @@ void Image::UpdateImage()
 		m_mat = QtOcv::image2Mat(m_qImg);
 }
 
-Image& Image::operator=(const QImage& qImg)
+MImage& MImage::operator=(const QImage& qImg)
 {
 	if (&m_qImg == &qImg)
 		return *this;
@@ -51,7 +60,7 @@ Image& Image::operator=(const QImage& qImg)
 	return *this;
 }
 
-Image & Image::operator=(const cv::Mat & mat)
+MImage & MImage::operator=(const cv::Mat & mat)
 {
 	if (&m_mat == &mat)
 		return *this;

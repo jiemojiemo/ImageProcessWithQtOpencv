@@ -2,7 +2,7 @@
 
 #include "common/common.h"
 
-class Image;
+class MImage;
 class QImage;
 
 class ImageToQImage
@@ -12,5 +12,5 @@ private:
 	ImageToQImage() = default;
 	~ImageToQImage() = default;
 public:
-	static QImage DoChange( const Image& img );
+	static QImage DoChange( const MImage& img );
 };
