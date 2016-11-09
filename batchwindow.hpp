@@ -26,6 +26,11 @@ private slots:
 
 	//Process
 	void on_actionGray_Scale_triggered();
+	void on_actionEdge_Detect_triggered();
+	void on_actionOil_triggered();
+	//Rotate
+	void on_actionLeft_90_triggered();
+	void on_actionRight_90_triggered();
 
 	void RemoveIcon(IconWidget* removeItem);
 	void OpenImage(IconWidget* item);

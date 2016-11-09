@@ -3,18 +3,34 @@
 #include "ImageBox.h"
 #include "DataStructure/MImage.h"
 #include "FileOperator/QImageBatchFileOperator.h"
-#include "Magic/GrayScaler.h"
+#include "Context/Context.h"
+#include "Magic/MagicianFactory.h"
 
 #include <algorithm>
 
 
 int kCount = 0;
+
+#define GET_CLASS_DO_MAGIC_THEN_SHOW(className)			\
+auto magician(MagicianFactory::SharedMagicianFactory().GetMagicianByName(className));\
+for (auto &iter : m_iconList)\
+{\
+	iter->SetMag(magician);\
+	iter->DoMagic();\
+}
+
+#define GET_CLASS_STR_NAME Context::GetContext().GetMagicanNameFromFunctionName(__FUNCTION__)
+
+#define DO_PROCESS_AND_SHOW GET_CLASS_DO_MAGIC_THEN_SHOW(GET_CLASS_STR_NAME)
+
 BatchWindow::BatchWindow(QWidget * parent) : QMainWindow(parent) 
 {
 	m_layout = new QGridLayout(this);
 	m_containWidget = new QWidget(this);
-	m_imgBox = new ImageBox(this);
+
+	m_imgBox = new ImageBox();
 	m_imgBox->setMode(ImageBox::AUTO_SIZE);
+	m_imgBox->setWindowFlags(Qt::WindowStaysOnTopHint);
 
 	ui.setupUi(this);
 
@@ -66,12 +82,33 @@ void BatchWindow::on_actionClear_All_triggered()
 
 void BatchWindow::on_actionGray_Scale_triggered()
 {
-	auto magician(MagicianFactory::SharedMagicianFactory().GetMagicianByName("GrayScaler"));
-	for (auto &iter : m_iconList)
-	{
-		iter->SetMag(magician);
-		iter->DoMagic();
-	}
+	//auto magician(MagicianFactory::SharedMagicianFactory().GetMagicianByName("GrayScaler"));
+	//for (auto &iter : m_iconList)
+	//{
+	//	iter->SetMag(magician);
+	//	iter->DoMagic();
+	//}
+	DO_PROCESS_AND_SHOW;
+}
+
+void BatchWindow::on_actionEdge_Detect_triggered()
+{
+	DO_PROCESS_AND_SHOW;
+}
+
+void BatchWindow::on_actionOil_triggered()
+{
+	DO_PROCESS_AND_SHOW;
+}
+
+void BatchWindow::on_actionLeft_90_triggered()
+{
+	DO_PROCESS_AND_SHOW;
+}
+
+void BatchWindow::on_actionRight_90_triggered()
+{
+	DO_PROCESS_AND_SHOW;
 }
 
 void BatchWindow::RemoveIcon(IconWidget* removeItem)
@@ -83,8 +120,6 @@ void BatchWindow::RemoveIcon(IconWidget* removeItem)
 
 void BatchWindow::OpenImage(IconWidget* item)
 {
-	auto path = item->GetImagePath();
-	QImage img(path);
 	m_imgBox->setImage(item->GetQImage());
 	m_imgBox->show();
 }

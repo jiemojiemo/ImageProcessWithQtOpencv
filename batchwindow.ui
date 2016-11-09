@@ -60,9 +60,19 @@
      <string>Process</string>
     </property>
     <addaction name="actionGray_Scale"/>
+    <addaction name="actionEdge_Detect"/>
+    <addaction name="actionOil"/>
+   </widget>
+   <widget class="QMenu" name="menuRotate">
+    <property name="title">
+     <string>Rotate</string>
+    </property>
+    <addaction name="actionLeft_90"/>
+    <addaction name="actionRight_90"/>
    </widget>
    <addaction name="menuFile_F"/>
    <addaction name="menuProcess"/>
+   <addaction name="menuRotate"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen_New_Folder">
@@ -83,6 +93,26 @@
   <action name="actionGray_Scale">
    <property name="text">
     <string>Gray Scale</string>
+   </property>
+  </action>
+  <action name="actionEdge_Detect">
+   <property name="text">
+    <string>Edge Detect</string>
+   </property>
+  </action>
+  <action name="actionOil">
+   <property name="text">
+    <string>Oil</string>
+   </property>
+  </action>
+  <action name="actionLeft_90">
+   <property name="text">
+    <string>Left 90</string>
+   </property>
+  </action>
+  <action name="actionRight_90">
+   <property name="text">
+    <string>Right 90</string>
    </property>
   </action>
  </widget>

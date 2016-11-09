@@ -4,5 +4,10 @@
     "MainWindow::on_actionOil_triggered":"OilPainter",
     "MainWindow::on_actionContour_triggered":"Contourer2",
     "MainWindow::on_actionLeft_90_triggered":"AntiClockWiseRotator",
-    "MainWindow::on_actionRight_90_triggered":"ClockWiseRotator"
+    "MainWindow::on_actionRight_90_triggered":"ClockWiseRotator",
+    "BatchWindow::on_actionGray_Scale_triggered":"GrayScaler",
+    "BatchWindow::on_actionEdge_Detect_triggered":"EdgeDetector2",
+    "BatchWindow::on_actionOil_triggered":"OilPainter",
+    "BatchWindow::on_actionLeft_90_triggered":"AntiClockWiseRotator",
+    "BatchWindow::on_actionRight_90_triggered":"ClockWiseRotator"
 }
