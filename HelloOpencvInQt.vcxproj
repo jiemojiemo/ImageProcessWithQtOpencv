@@ -173,9 +173,11 @@
     <ClCompile Include="ImageRotator\QImageRotator.cpp" />
     <ClCompile Include="Json\MRapidJson.cpp" />
     <ClCompile Include="Magic\AntiClockWiseRotator.cpp" />
+    <ClCompile Include="Magic\Carver.cpp" />
     <ClCompile Include="Magic\Contourer2.cpp" />
     <ClCompile Include="Magic\EdgeDetector2.cpp" />
     <ClCompile Include="Magic\EdgeDetector.cpp" />
+    <ClCompile Include="Magic\Embosser.cpp" />
     <ClCompile Include="Magic\GrayScaler.cpp" />
     <ClCompile Include="Magic\MagicianFactory.cpp" />
     <ClCompile Include="Magic\OilPainter.cpp" />
@@ -230,9 +232,11 @@
     <ClInclude Include="Json\MagicJson.h" />
     <ClInclude Include="Json\MRapidJson.h" />
     <ClInclude Include="Magic\AntiClockWiseRotator.h" />
+    <ClInclude Include="Magic\Carver.h" />
     <ClInclude Include="Magic\Contourer2.h" />
     <ClInclude Include="Magic\EdgeDetector2.h" />
     <ClInclude Include="Magic\EdgeDetector.h" />
+    <ClInclude Include="Magic\Embosser.h" />
     <ClInclude Include="Magic\GrayScaler.h" />
     <ClInclude Include="Magic\Magician.h" />
     <ClInclude Include="Magic\MagicianFactory.h" />

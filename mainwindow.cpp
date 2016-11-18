@@ -62,9 +62,9 @@ void MainWindow::ReadImage(const QString& filename)
 	if (filename.isEmpty())
 		return;
 
-	/* QByteArray ba = filename.toLocal8Bit();
-	 m_img = cv::imread(ba.data());*/
-	m_img = QImage(filename);
+	QByteArray ba = filename.toLocal8Bit();
+	m_img = cv::imread(ba.data());
+	//m_img = QImage(filename);
 
 }
 

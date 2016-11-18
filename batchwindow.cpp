@@ -42,7 +42,10 @@ BatchWindow::BatchWindow(QWidget * parent) : QMainWindow(parent)
 
 BatchWindow::~BatchWindow() 
 {
-
+	if (m_imgBox != nullptr)
+	{
+		delete m_imgBox;
+	}
 }
 
 void BatchWindow::on_actionOpen_New_Folder_triggered()
