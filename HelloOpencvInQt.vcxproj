@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClCompile Include="batchwindow.cpp" />
     <ClCompile Include="Context\Context.cpp" />
+    <ClCompile Include="DataStructure\BufferImage.cpp" />
     <ClCompile Include="DataStructure\MImage.cpp" />
     <ClCompile Include="FileOperator\QImageBatchFileOperator.cpp" />
     <ClCompile Include="FileOperator\QImageFileOperator.cpp" />
@@ -179,6 +180,7 @@
     <ClCompile Include="Magic\EdgeDetector.cpp" />
     <ClCompile Include="Magic\Embosser.cpp" />
     <ClCompile Include="Magic\GrayScaler.cpp" />
+    <ClCompile Include="Magic\ImageMeger.cpp" />
     <ClCompile Include="Magic\MagicianFactory.cpp" />
     <ClCompile Include="Magic\OilPainter.cpp" />
     <ClCompile Include="Magic\ClockWiseRotator.cpp" />
@@ -210,6 +212,7 @@
     <ClInclude Include="Context\Context.h" />
     <ClInclude Include="DataStructure\Image.h" />
     <ClInclude Include="DataStructure\MImage.h" />
+    <ClInclude Include="DataStructure\BufferImage.h" />
     <ClInclude Include="FileOperator\ImageFileOperator.h" />
     <ClInclude Include="FileOperator\QImageBatchFileOperator.h" />
     <ClInclude Include="FileOperator\QImageFileOperator.h" />
@@ -238,6 +241,7 @@
     <ClInclude Include="Magic\EdgeDetector.h" />
     <ClInclude Include="Magic\Embosser.h" />
     <ClInclude Include="Magic\GrayScaler.h" />
+    <ClInclude Include="Magic\ImageMeger.h" />
     <ClInclude Include="Magic\Magician.h" />
     <ClInclude Include="Magic\MagicianFactory.h" />
     <ClInclude Include="Magic\MagicianRegister.h" />

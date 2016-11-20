@@ -20,6 +20,11 @@ MImage::MImage(const QString& path):m_qImg(path)
 	m_mat = QtOcv::image2Mat(m_qImg);
 }
 
+MImage::MImage(const MImage& img)
+{
+	SetMat(img.GetMat());
+}
+
 void MImage::DoMagic()
 {
 	if (m_mag != nullptr)
@@ -32,7 +37,7 @@ void MImage::DoMagic()
 
 void MImage::SetMat(const cv::Mat& val)
 {
-	m_mat = val;
+	m_mat = val.clone();
 	m_qImg = QtOcv::mat2Image(m_mat);
 }
 

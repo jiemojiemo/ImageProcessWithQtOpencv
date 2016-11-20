@@ -1,5 +1,6 @@
 #include "iconwidget.h"
 #include "DataStructure/MImage.h"
+#include "DataStructure/BufferImage.h"
 const int IconWidget::kWindowWidth = 128;
 const int IconWidget::kWindowHeight = 128;
 const int IconWidget::kButtonWidth = IconWidget::kWindowWidth / 5;
@@ -9,7 +10,7 @@ IconWidget::IconWidget(const QString& path, QWidget *parent)
 	: QLabel(parent),
 	m_pushBut("X", this),
 	m_imgPath(path),
-	m_img(new MImage(path))
+	m_img(new BufferImage(path))
 {
 	
 	this->Init();
@@ -46,9 +47,24 @@ QImage& IconWidget::GetQImage()
 	return m_img->GetQImage();
 }
 
+cv::Mat& IconWidget::GetMat()
+{
+	return m_img->GetMat();
+}
+
 QString IconWidget::GetImagePath()
 {
 	return m_imgPath;
+}
+
+void IconWidget::Undo()
+{
+	auto pItem = dynamic_cast<BufferImage*>(m_img);
+	if (pItem != nullptr)
+	{
+		pItem->Undo();
+		UpdateBackgound();
+	}
 }
 
 void IconWidget::enterEvent(QEvent *event)

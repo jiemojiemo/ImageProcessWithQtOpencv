@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QMouseEvent>
 #include <QPixmap>
+#include <core.hpp>
 #include "DataStructure/Image.h"
 #include "ui_iconwidget.h"
 
@@ -22,8 +23,11 @@ public:
 
 	const QImage& GetQImage()const;
 	QImage& GetQImage();
+	cv::Mat& GetMat();
 	QString GetImagePath();
 
+	void Undo();
+	
 	virtual void DoMagic();
 	virtual void SetMag(std::shared_ptr<Magician>& val);
 
@@ -51,7 +55,7 @@ private:
 	QPushButton m_pushBut;
 	QString m_imgPath;
 	MImage* m_img;
-
+public:
 	static const int kWindowWidth;
 	static const int kWindowHeight;
 	static const int kButtonWidth;

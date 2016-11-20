@@ -54,6 +54,8 @@
     <addaction name="actionOpen_New_Folder"/>
     <addaction name="actionOpen_New_Image"/>
     <addaction name="actionClear_All"/>
+    <addaction name="actionUndo"/>
+    <addaction name="actionMerge"/>
    </widget>
    <widget class="QMenu" name="menuProcess">
     <property name="title">
@@ -113,6 +115,16 @@
   <action name="actionRight_90">
    <property name="text">
     <string>Right 90</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionMerge">
+   <property name="text">
+    <string>Merge</string>
    </property>
   </action>
  </widget>

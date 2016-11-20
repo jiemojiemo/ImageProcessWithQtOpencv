@@ -9,6 +9,7 @@ class MImage : public Image
 {
 public:
 	MImage();
+	MImage(const MImage& img);
 	MImage(const std::string& path);
 	MImage(const QString& path);
 	MImage& operator=(const cv::Mat& mat);

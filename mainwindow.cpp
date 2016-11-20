@@ -39,9 +39,13 @@ if (magician != nullptr)\
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+	m_layout(new QGridLayout(this)),
+	m_graphicsScene(new QGraphicsScene(this))
 {
     ui->setupUi(this);
+
+	InitUi();
 	Context::GetContext();
 }
 
@@ -70,14 +74,21 @@ void MainWindow::ReadImage(const QString& filename)
 
 void MainWindow::ShowImageInGraphicsView(const QImage &qImg)
 {
-	ui->graphicsView->resize(qImg.width(), qImg.height());
+	int imgWidth = qImg.width();
+	int imgHeight = qImg.height();
 
-	auto graphicsScenc = new QGraphicsScene();
-	graphicsScenc->addPixmap(QPixmap::fromImage(qImg));
+	AdjustSize(imgWidth, imgHeight);
 
-	ui->graphicsView->setScene(graphicsScenc);
+	if (m_graphicsScene != nullptr)
+	{
+		delete m_graphicsScene;
+		m_graphicsScene = new QGraphicsScene(this);
+		m_graphicsScene->addPixmap(QPixmap::fromImage(qImg));
+		ui->graphicsView->setScene(m_graphicsScene);
+	}
 	ui->graphicsView->adjustSize();
-	ui->graphicsView->show();
+	SetLayout();
+
 }
 
 
@@ -93,6 +104,57 @@ void MainWindow::ShowImage(const MImage& img)
 	ShowImageInGraphicsView(img);
 }
 
+void MainWindow::InitUi()
+{
+	AdjustSize();
+	SetLayout();
+	ui->graphicsView->setScene(m_graphicsScene);
+	ui->graphicsView->show();
+
+	SetProcessDisabled(true);
+	SetFileActionsDisable(true);
+	SetRotateDisabled(true);
+}
+
+void MainWindow::AdjustSize(int newW/*=700*/, int newH/*=600*/)
+{
+	int w = newW < kMinWinWidth ? kMinWinWidth : newW;
+	int h = newH < kMinWinHeight ? kMinWinHeight : newH;
+
+	this->resize(w,h);
+}
+
+void MainWindow::SetLayout()
+{
+	m_layout->addWidget(ui->graphicsView, 0, Qt::AlignCenter);
+	ui->centralWidget->setLayout(m_layout);
+}
+
+void MainWindow::SetNewImageState()
+{
+	SetProcessDisabled(false);
+	SetFileActionsDisable(false);
+	SetRotateDisabled(false);
+}
+
+void MainWindow::SetFileActionsDisable(bool b/*=false*/)
+{
+	ui->actionClose->setDisabled(b);
+	ui->actionSave->setDisabled(b);
+	ui->actionSave_As->setDisabled(b);
+}
+
+void MainWindow::SetProcessDisabled(bool b)
+{
+	ui->menuProcess->setDisabled(b);
+}
+
+void MainWindow::SetRotateDisabled(bool b /*= false*/)
+{
+	ui->actionLeft_90->setDisabled(b);
+	ui->actionRight_90->setDisabled(b);
+}
+
 void MainWindow::on_actionOpen_triggered()
 {
 	std::unique_ptr<ImageFileOperator> fileOperator(std::make_unique<QImageFileOperator>());
@@ -103,11 +165,14 @@ void MainWindow::on_actionOpen_triggered()
 		ReadImage(Context::GetContext().GetCurrentFilename());
 		ShowImage(m_img);
 	}
+	SetNewImageState();
 }
 
 void MainWindow::on_actionClose_triggered()
 {
     ui->graphicsView->scene()->clear();
+	SetProcessDisabled(true);
+	SetFileActionsDisable(true);
 }
 
 void MainWindow::on_actionSave_triggered()
@@ -125,11 +190,8 @@ void MainWindow::on_actionSave_As_triggered()
 void MainWindow::on_actionBatching_triggered()
 {
 	BatchWindow* batchWin = new BatchWindow(this);
-	//batchWin->setWindowModality(Qt::ApplicationModal);
 
 	batchWin->show();
-	//this->hide();
-	//this->close();
 }
 
 void MainWindow::on_actionLeft_90_triggered()
@@ -164,5 +226,18 @@ void MainWindow::on_actionOil_triggered()
 void MainWindow::on_actionContour_triggered()
 {
 	DO_PROCESS_AND_SHOW;
+}
+
+void MainWindow::on_actionUndo_triggered()
+{
+	m_img.Undo();
+	ShowImage(m_img);
+}
+
+void MainWindow::ReceiveImage(cv::Mat& mat)
+{
+	m_img = mat;
+	SetNewImageState();
+	ShowImage(m_img);
 }
 

@@ -2,9 +2,11 @@
 #include "iconwidget.h"
 #include "ImageBox.h"
 #include "DataStructure/MImage.h"
+#include "DataStructure/BufferImage.h"
 #include "FileOperator/QImageBatchFileOperator.h"
 #include "Context/Context.h"
 #include "Magic/MagicianFactory.h"
+#include "Magic/ImageMeger.h"
 
 #include <algorithm>
 
@@ -23,6 +25,9 @@ for (auto &iter : m_iconList)\
 
 #define DO_PROCESS_AND_SHOW GET_CLASS_DO_MAGIC_THEN_SHOW(GET_CLASS_STR_NAME)
 
+const int BatchWindow::kWinWidth = 700;
+const int BatchWindow::kWinHeight = 600;
+
 BatchWindow::BatchWindow(QWidget * parent) : QMainWindow(parent) 
 {
 	m_layout = new QGridLayout(this);
@@ -33,11 +38,13 @@ BatchWindow::BatchWindow(QWidget * parent) : QMainWindow(parent)
 	m_imgBox->setWindowFlags(Qt::WindowStaysOnTopHint);
 
 	ui.setupUi(this);
-
+	this->resize(kWinWidth, kWinHeight);
 	m_containWidget->setLayout(m_layout);
 	ui.scrollArea->setWidgetResizable(true);
 	ui.scrollArea->setWidget(m_containWidget);
 	this->setCentralWidget(ui.scrollArea);
+
+	connect(this, SIGNAL(SentMat(cv::Mat&)), parent, SLOT(ReceiveImage(cv::Mat&)));
 }
 
 BatchWindow::~BatchWindow() 
@@ -81,6 +88,25 @@ void BatchWindow::on_actionClear_All_triggered()
 	}
 	m_iconList.clear();
 	
+}
+
+void BatchWindow::on_actionUndo_triggered()
+{
+	for (auto& item : m_iconList)
+	{
+		item->Undo();
+	}
+}
+
+void BatchWindow::on_actionMerge_triggered()
+{
+	ImageMerger merge;
+	for (auto& item : m_iconList)
+	{
+		merge.AddImage(item->GetMat());
+	}
+	auto result = merge.MergeImages();
+	emit this->SentMat(result);
 }
 
 void BatchWindow::on_actionGray_Scale_triggered()
@@ -144,7 +170,7 @@ void BatchWindow::AddImage(const std::string& imgPath)
 	{
 		auto iconImg = new IconWidget(QString::fromStdString(imgPath), this);
 		m_iconList.push_back(iconImg);
-		m_layout->addWidget(iconImg, 0, kCount++);
+		m_layout->addWidget(iconImg, GetWidgetRowIndex(), GetWidgetColIndex());
 	}
 }
 
@@ -154,4 +180,18 @@ void BatchWindow::AddImage(const std::list<std::string>& imgPathList)
 	{
 		AddImage(path);
 	}
+}
+
+int BatchWindow::GetWidgetRowIndex()
+{
+	int rowMaxCount = kWinWidth / IconWidget::kWindowWidth;
+	int iconWidgetCount = m_iconList.size()-1;
+	return iconWidgetCount / rowMaxCount;
+}
+
+int BatchWindow::GetWidgetColIndex()
+{
+	int rowMaxCount = kWinWidth / IconWidget::kWindowWidth;
+	int iconWidgetCount = m_iconList.size()-1;
+	return iconWidgetCount % rowMaxCount;
 }
