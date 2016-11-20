@@ -180,15 +180,18 @@
     <ClCompile Include="Magic\EdgeDetector.cpp" />
     <ClCompile Include="Magic\Embosser.cpp" />
     <ClCompile Include="Magic\GrayScaler.cpp" />
+    <ClCompile Include="Magic\HorizontalMerger.cpp" />
     <ClCompile Include="Magic\ImageMeger.cpp" />
     <ClCompile Include="Magic\MagicianFactory.cpp" />
     <ClCompile Include="Magic\OilPainter.cpp" />
     <ClCompile Include="Magic\ClockWiseRotator.cpp" />
+    <ClCompile Include="Magic\VerticalMerger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="ImageBox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Magic\VerticalMerger.h" />
     <CustomBuild Include="ImageBox.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing ImageBox.h...</Message>
@@ -241,6 +244,7 @@
     <ClInclude Include="Magic\EdgeDetector.h" />
     <ClInclude Include="Magic\Embosser.h" />
     <ClInclude Include="Magic\GrayScaler.h" />
+    <ClInclude Include="Magic\HorizontalMerger.h" />
     <ClInclude Include="Magic\ImageMeger.h" />
     <ClInclude Include="Magic\Magician.h" />
     <ClInclude Include="Magic\MagicianFactory.h" />

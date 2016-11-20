@@ -16,12 +16,12 @@ public:
 
 	virtual void Pretreat();
 	virtual void ConstructImageArray();
-	virtual void InitDstImage();
-	virtual void ConstructDstImage();
+	virtual void InitDstImage()=0;
+	virtual void ConstructDstImage()=0;
 private:
 	void PretreatByResize(cv::Mat& mat);
 	void DeletePImgArray();
-private:
+protected:
 	std::vector<cv::Mat> m_imgArray;
 	std::vector<IplImage*> m_pImgArray;
 	IplImage* m_dstImage;

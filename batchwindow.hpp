@@ -11,6 +11,7 @@
 class IconWidget;
 class ImageBox;
 class MImage;
+class ImageMerger;
 class BatchWindow : public QMainWindow {
 	Q_OBJECT
 
@@ -24,7 +25,8 @@ private slots:
 	void on_actionOpen_New_Image_triggered();
 	void on_actionClear_All_triggered();
 	void on_actionUndo_triggered();
-	void on_actionMerge_triggered();
+	void on_actionVertical_Merge_triggered();
+	void on_actionHorizontal_Merge_triggered();
 
 	//Process
 	void on_actionGray_Scale_triggered();
@@ -44,6 +46,7 @@ private:
 	void AddImage(const std::list<std::string>& imgPathList);
 	int GetWidgetRowIndex();
 	int GetWidgetColIndex();
+	void MergeImages(ImageMerger* merge);
 
 
 private:

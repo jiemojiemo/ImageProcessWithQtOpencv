@@ -7,6 +7,8 @@
 #include "Context/Context.h"
 #include "Magic/MagicianFactory.h"
 #include "Magic/ImageMeger.h"
+#include "Magic/HorizontalMerger.h"
+#include "Magic/VerticalMerger.h"
 
 #include <algorithm>
 
@@ -98,25 +100,22 @@ void BatchWindow::on_actionUndo_triggered()
 	}
 }
 
-void BatchWindow::on_actionMerge_triggered()
+void BatchWindow::on_actionVertical_Merge_triggered()
 {
-	ImageMerger merge;
-	for (auto& item : m_iconList)
-	{
-		merge.AddImage(item->GetMat());
-	}
-	auto result = merge.MergeImages();
-	emit this->SentMat(result);
+	ImageMerger* merge = new VerticalMerger;
+	ON_SCOPE_EXIT([&merge]() {delete merge; });
+	this->MergeImages(merge);
+}
+
+void BatchWindow::on_actionHorizontal_Merge_triggered()
+{
+	ImageMerger* merge = new HorizontalMerger;
+	ON_SCOPE_EXIT([&merge]() {delete merge; });
+	this->MergeImages(merge);
 }
 
 void BatchWindow::on_actionGray_Scale_triggered()
 {
-	//auto magician(MagicianFactory::SharedMagicianFactory().GetMagicianByName("GrayScaler"));
-	//for (auto &iter : m_iconList)
-	//{
-	//	iter->SetMag(magician);
-	//	iter->DoMagic();
-	//}
 	DO_PROCESS_AND_SHOW;
 }
 
@@ -194,4 +193,14 @@ int BatchWindow::GetWidgetColIndex()
 	int rowMaxCount = kWinWidth / IconWidget::kWindowWidth;
 	int iconWidgetCount = m_iconList.size()-1;
 	return iconWidgetCount % rowMaxCount;
+}
+
+void BatchWindow::MergeImages(ImageMerger* merge)
+{
+	for (auto& item : m_iconList)
+	{
+		merge->AddImage(item->GetMat());
+	}
+	auto result = merge->MergeImages();
+	emit this->SentMat(result);
 }

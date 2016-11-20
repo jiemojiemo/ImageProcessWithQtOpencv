@@ -164,8 +164,9 @@ void MainWindow::on_actionOpen_triggered()
 		Context::GetContext().SetCurrentFilename(QString::fromStdString(filename));
 		ReadImage(Context::GetContext().GetCurrentFilename());
 		ShowImage(m_img);
+		SetNewImageState();
 	}
-	SetNewImageState();
+
 }
 
 void MainWindow::on_actionClose_triggered()

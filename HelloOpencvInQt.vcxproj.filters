@@ -170,6 +170,12 @@
     <ClCompile Include="Magic\ImageMeger.cpp">
       <Filter>Magic</Filter>
     </ClCompile>
+    <ClCompile Include="Magic\HorizontalMerger.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="Magic\VerticalMerger.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -285,6 +291,12 @@
       <Filter>DataStructure</Filter>
     </ClInclude>
     <ClInclude Include="Magic\ImageMeger.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\VerticalMerger.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\HorizontalMerger.h">
       <Filter>Magic</Filter>
     </ClInclude>
   </ItemGroup>

@@ -55,7 +55,6 @@
     <addaction name="actionOpen_New_Image"/>
     <addaction name="actionClear_All"/>
     <addaction name="actionUndo"/>
-    <addaction name="actionMerge"/>
    </widget>
    <widget class="QMenu" name="menuProcess">
     <property name="title">
@@ -72,9 +71,17 @@
     <addaction name="actionLeft_90"/>
     <addaction name="actionRight_90"/>
    </widget>
+   <widget class="QMenu" name="menuMerge">
+    <property name="title">
+     <string>Merge</string>
+    </property>
+    <addaction name="actionVertical_Merge"/>
+    <addaction name="actionHorizontal_Merge"/>
+   </widget>
    <addaction name="menuFile_F"/>
    <addaction name="menuProcess"/>
    <addaction name="menuRotate"/>
+   <addaction name="menuMerge"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen_New_Folder">
@@ -125,6 +132,16 @@
   <action name="actionMerge">
    <property name="text">
     <string>Merge</string>
+   </property>
+  </action>
+  <action name="actionVertical_Merge">
+   <property name="text">
+    <string>Vertical Merge</string>
+   </property>
+  </action>
+  <action name="actionHorizontal_Merge">
+   <property name="text">
+    <string>Horizontal Merge</string>
    </property>
   </action>
  </widget>
