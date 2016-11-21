@@ -136,7 +136,7 @@ void IconWidget::SetUpConnect(QWidget* parent)
 {
 	connect(&m_pushBut, SIGNAL(clicked()), this, SLOT(ClickCloseButton()));
 	connect(this, SIGNAL(IconClose(IconWidget*)), parent, SLOT(RemoveIcon(IconWidget*)));
-	connect(this, SIGNAL(clicked(IconWidget*)), parent, SLOT(OpenImage(IconWidget*)));
+	connect(this, SIGNAL(clicked(IconWidget*)), parent, SLOT(ClickImage(IconWidget*)));
 }
 
 void IconWidget::SetOpenHandCursor()

@@ -46,6 +46,8 @@ BatchWindow::BatchWindow(QWidget * parent) : QMainWindow(parent)
 	ui.scrollArea->setWidget(m_containWidget);
 	this->setCentralWidget(ui.scrollArea);
 
+	SetNoImageState();
+
 	connect(this, SIGNAL(SentMat(cv::Mat&)), parent, SLOT(ReceiveImage(cv::Mat&)));
 }
 
@@ -89,6 +91,8 @@ void BatchWindow::on_actionClear_All_triggered()
 		delete iter;
 	}
 	m_iconList.clear();
+
+	SetNoImageState();
 	
 }
 
@@ -146,7 +150,7 @@ void BatchWindow::RemoveIcon(IconWidget* removeItem)
 	delete removeItem;
 }
 
-void BatchWindow::OpenImage(IconWidget* item)
+void BatchWindow::ClickImage(IconWidget* item)
 {
 	m_imgBox->setImage(item->GetQImage());
 	m_imgBox->show();
@@ -167,6 +171,11 @@ void BatchWindow::AddImage(const std::string& imgPath)
 {
 	if (!IsExitFilePath(imgPath))
 	{
+		if (m_iconList.empty())
+		{
+			SetNewImageState();
+		}
+
 		auto iconImg = new IconWidget(QString::fromStdString(imgPath), this);
 		m_iconList.push_back(iconImg);
 		m_layout->addWidget(iconImg, GetWidgetRowIndex(), GetWidgetColIndex());
@@ -203,4 +212,33 @@ void BatchWindow::MergeImages(ImageMerger* merge)
 	}
 	auto result = merge->MergeImages();
 	emit this->SentMat(result);
+}
+
+void BatchWindow::SetNewImageState()
+{
+	SetProcessDisable(false);
+	SetRotateDisable(false);
+	SetMergeDisable(false);
+}
+
+void BatchWindow::SetNoImageState()
+{
+	SetProcessDisable(true);
+	SetRotateDisable(true);
+	SetMergeDisable(true);
+}
+
+void BatchWindow::SetProcessDisable(bool b /*= true*/)
+{
+	ui.menuProcess->setDisabled(b);
+}
+
+void BatchWindow::SetRotateDisable(bool b /*= true*/)
+{
+	ui.menuRotate->setDisabled(b);
+}
+
+void BatchWindow::SetMergeDisable(bool b /*= true*/)
+{
+	ui.menuMerge->setDisabled(b);
 }

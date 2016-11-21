@@ -8,11 +8,14 @@
 #include "Magic/GrayScaler.h"
 #include "Magic/OilPainter.h"
 #include "Magic/MagicianFactory.h"
+#include "Magic/TextPainterImpl.h"
 #include "FileOperator/QImageFileOperator.h"
 #include "Context/Context.h"
 #include "iconwidget.h"
 
 #include "batchwindow.hpp"
+#include "ImageDatabaseWindow.h"
+#include "InputTextDialog.h"
 
 #include <memory>
 
@@ -22,6 +25,7 @@
 #include <QMessageBox>
 #include <QMatrix>
 #include <QGridLayout>
+#include <QTextEdit>
 
 #define GET_CLASS_DO_MAGIC_THEN_SHOW(className)			\
 auto magician(MagicianFactory::SharedMagicianFactory().GetMagicianByName(className));\
@@ -41,7 +45,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
 	m_layout(new QGridLayout(this)),
-	m_graphicsScene(new QGraphicsScene(this))
+	m_graphicsScene(new QGraphicsScene(this)),
+	m_batchWin(nullptr),
+	m_databaseWin(nullptr),
+	m_textWin(nullptr)
 {
     ui->setupUi(this);
 
@@ -54,11 +61,39 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+QString MainWindow::GetText()
+{
+	if (m_textWin == nullptr)
+	{
+		m_textWin = new InputTextDialog(this);
+
+	}
+	if (m_textWin->exec() == QDialog::Accepted)
+	{
+		return m_textWin->GetTextEditString();
+	}
+	else
+	{
+		return QString();
+	}
+	
+}
+
 QString MainWindow::GetFilename()
 {
     QString filename = QFileDialog::getOpenFileName(
                 this,tr("Open Image"),".",tr("Image File(*.png *.jpg *.jpeg *.bmp)"));
 	return filename;
+}
+
+void MainWindow::PaintTextOnImage(const QString& text)
+{
+	TextPainter* painter = new TextPainterImpl();
+	ON_SCOPE_EXIT([&painter]() {delete painter; });
+
+	m_img = painter->PaintText(m_img, text.toStdString());
+
+
 }
 
 void MainWindow::ReadImage(const QString& filename)
@@ -132,6 +167,7 @@ void MainWindow::SetLayout()
 
 void MainWindow::SetNewImageState()
 {
+	this->raise();
 	SetProcessDisabled(false);
 	SetFileActionsDisable(false);
 	SetRotateDisabled(false);
@@ -151,8 +187,7 @@ void MainWindow::SetProcessDisabled(bool b)
 
 void MainWindow::SetRotateDisabled(bool b /*= false*/)
 {
-	ui->actionLeft_90->setDisabled(b);
-	ui->actionRight_90->setDisabled(b);
+	ui->menuRotate->setDisabled(b);
 }
 
 void MainWindow::on_actionOpen_triggered()
@@ -190,9 +225,26 @@ void MainWindow::on_actionSave_As_triggered()
 
 void MainWindow::on_actionBatching_triggered()
 {
-	BatchWindow* batchWin = new BatchWindow(this);
+	if (m_batchWin == nullptr)
+	{
+		m_batchWin = new BatchWindow(this);
+	}
+	m_batchWin->show();
+	//BatchWindow* batchWin = new BatchWindow(this);
 
-	batchWin->show();
+	//batchWin->show();
+	//static BatchWindow batchWin(this);
+	//batchWin.show();
+}
+
+void MainWindow::on_actionImage_Database_triggered()
+{
+	if (m_databaseWin == nullptr)
+	{
+		m_databaseWin = new ImageDatabaseWindow("images.db", "images_tab", this);
+	}
+	m_databaseWin->show();
+
 }
 
 void MainWindow::on_actionLeft_90_triggered()
@@ -229,6 +281,32 @@ void MainWindow::on_actionContour_triggered()
 	DO_PROCESS_AND_SHOW;
 }
 
+void MainWindow::on_actionEmboss_triggered()
+{
+	DO_PROCESS_AND_SHOW;
+}
+
+void MainWindow::on_actionCarve_triggered()
+{
+	DO_PROCESS_AND_SHOW;
+}
+
+void MainWindow::on_actionHorizontal_Text_triggered()
+{
+	DO_PROCESS_AND_SHOW;
+	auto text = GetText();
+	PaintTextOnImage(text);
+	ShowImage(m_img);
+}
+
+void MainWindow::on_actionVertical_Text_triggered()
+{
+	DO_PROCESS_AND_SHOW;
+	auto text = GetText();
+	PaintTextOnImage(text);
+	ShowImage(m_img);
+}
+
 void MainWindow::on_actionUndo_triggered()
 {
 	m_img.Undo();
@@ -238,6 +316,13 @@ void MainWindow::on_actionUndo_triggered()
 void MainWindow::ReceiveImage(cv::Mat& mat)
 {
 	m_img = mat;
+	SetNewImageState();
+	ShowImage(m_img);
+}
+
+void MainWindow::ReceiveImage(QImage& img)
+{
+	m_img = img;
 	SetNewImageState();
 	ShowImage(m_img);
 }

@@ -35,21 +35,26 @@ private slots:
 	//Rotate
 	void on_actionLeft_90_triggered();
 	void on_actionRight_90_triggered();
-
+protected slots:
 	void RemoveIcon(IconWidget* removeItem);
-	void OpenImage(IconWidget* item);
+	virtual void ClickImage(IconWidget* item);
 signals:
 	void SentMat(cv::Mat& mat);
-private:
+protected:
 	bool IsExitFilePath(const std::string& imgPath);
 	void AddImage(const std::string& imgPath);
 	void AddImage(const std::list<std::string>& imgPathList);
 	int GetWidgetRowIndex();
 	int GetWidgetColIndex();
 	void MergeImages(ImageMerger* merge);
+	void SetNewImageState();
+	void SetNoImageState();
+	void SetProcessDisable(bool b = true);
+	void SetRotateDisable(bool b = true);
+	void SetMergeDisable(bool b = true);
 
 
-private:
+protected:
 	Ui::BatchWindow ui;
 	QGridLayout* m_layout;
 	QWidget* m_containWidget;

@@ -69,6 +69,9 @@
     <Filter Include="Json">
       <UniqueIdentifier>{6be31961-4b8c-40f8-8542-5ddfae41d517}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SQLite">
+      <UniqueIdentifier>{8b028816-410a-4e9a-98f9-29d35fc8cfba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -176,6 +179,36 @@
     <ClCompile Include="Magic\VerticalMerger.cpp">
       <Filter>Magic</Filter>
     </ClCompile>
+    <ClCompile Include="SQLite\SQLSelector.cpp">
+      <Filter>SQLite</Filter>
+    </ClCompile>
+    <ClCompile Include="SQLite\ImageModel.cpp">
+      <Filter>SQLite</Filter>
+    </ClCompile>
+    <ClCompile Include="SQLite\ImageDatabaseWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ImageDatabaseWindow.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ImageDatabaseWindow.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_InputTextDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_InputTextDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="InputTextDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Magic\TextPainterImpl.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="Magic\Assigner.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -197,6 +230,15 @@
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="ImageBox.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ImageDatabaseWindow.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="InputTextDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="InputTextDialog.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -297,6 +339,30 @@
       <Filter>Magic</Filter>
     </ClInclude>
     <ClInclude Include="Magic\HorizontalMerger.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="SQLite\SQLSelector.h">
+      <Filter>SQLite</Filter>
+    </ClInclude>
+    <ClInclude Include="SQLite\SQLiteSelector.h">
+      <Filter>SQLite</Filter>
+    </ClInclude>
+    <ClInclude Include="SQLite\ImageModel.h">
+      <Filter>SQLite</Filter>
+    </ClInclude>
+    <ClInclude Include="SQLite\DataModel.h">
+      <Filter>SQLite</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_InputTextDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\TextPainter.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\TextPainterImpl.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\Assigner.h">
       <Filter>Magic</Filter>
     </ClInclude>
   </ItemGroup>

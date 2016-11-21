@@ -47,6 +47,7 @@
     <addaction name="actionSave_As"/>
     <addaction name="actionUndo"/>
     <addaction name="actionBatching"/>
+    <addaction name="actionImage_Database"/>
    </widget>
    <widget class="QMenu" name="menuProcess">
     <property name="title">
@@ -56,6 +57,8 @@
     <addaction name="actionGray_Scale"/>
     <addaction name="actionOil"/>
     <addaction name="actionContour"/>
+    <addaction name="actionEmboss"/>
+    <addaction name="actionCarve"/>
    </widget>
    <widget class="QMenu" name="menuRotate">
     <property name="title">
@@ -64,9 +67,17 @@
     <addaction name="actionLeft_90"/>
     <addaction name="actionRight_90"/>
    </widget>
+   <widget class="QMenu" name="menuAddText">
+    <property name="title">
+     <string>AddText</string>
+    </property>
+    <addaction name="actionVertical_Text"/>
+    <addaction name="actionHorizontal_Text"/>
+   </widget>
    <addaction name="menu_F"/>
    <addaction name="menuProcess"/>
    <addaction name="menuRotate"/>
+   <addaction name="menuAddText"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -135,6 +146,31 @@
   <action name="actionUndo">
    <property name="text">
     <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionImage_Database">
+   <property name="text">
+    <string>Image Database</string>
+   </property>
+  </action>
+  <action name="actionEmboss">
+   <property name="text">
+    <string>Emboss</string>
+   </property>
+  </action>
+  <action name="actionCarve">
+   <property name="text">
+    <string>Carve</string>
+   </property>
+  </action>
+  <action name="actionVertical_Text">
+   <property name="text">
+    <string>Vertical Text</string>
+   </property>
+  </action>
+  <action name="actionHorizontal_Text">
+   <property name="text">
+    <string>Horizontal Text</string>
    </property>
   </action>
  </widget>
