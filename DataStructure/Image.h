@@ -10,6 +10,7 @@ public:
 
 	virtual void DoMagic() = 0;
 	virtual void SetMag(std::shared_ptr<Magician>& val) = 0;
+
 protected:
 	std::shared_ptr<Magician> m_mag;
 };

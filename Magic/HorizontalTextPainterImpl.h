@@ -1,7 +1,7 @@
 #pragma once
-#include "Magic/TextPainter.h"
+#include "Magic/QTextPainter.h"
 
-class TextPainterImpl : public TextPainter
+class HorizontalTextPainterImpl : public QTextPainter
 {
 public:
 	virtual QImage PaintText(MImage& img, const std::string& text);

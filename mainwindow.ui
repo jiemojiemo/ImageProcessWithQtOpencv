@@ -48,6 +48,7 @@
     <addaction name="actionUndo"/>
     <addaction name="actionBatching"/>
     <addaction name="actionImage_Database"/>
+    <addaction name="actionShare_To_Weibo"/>
    </widget>
    <widget class="QMenu" name="menuProcess">
     <property name="title">
@@ -56,7 +57,7 @@
     <addaction name="actionEdge_Detect"/>
     <addaction name="actionGray_Scale"/>
     <addaction name="actionOil"/>
-    <addaction name="actionContour"/>
+    <addaction name="actionStrech"/>
     <addaction name="actionEmboss"/>
     <addaction name="actionCarve"/>
    </widget>
@@ -71,7 +72,6 @@
     <property name="title">
      <string>AddText</string>
     </property>
-    <addaction name="actionVertical_Text"/>
     <addaction name="actionHorizontal_Text"/>
    </widget>
    <addaction name="menu_F"/>
@@ -133,9 +133,9 @@
     <string>Oil</string>
    </property>
   </action>
-  <action name="actionContour">
+  <action name="actionStrech">
    <property name="text">
-    <string>Contour</string>
+    <string>Strech</string>
    </property>
   </action>
   <action name="actionBatching">
@@ -171,6 +171,11 @@
   <action name="actionHorizontal_Text">
    <property name="text">
     <string>Horizontal Text</string>
+   </property>
+  </action>
+  <action name="actionShare_To_Weibo">
+   <property name="text">
+    <string>Share To Weibo</string>
    </property>
   </action>
  </widget>

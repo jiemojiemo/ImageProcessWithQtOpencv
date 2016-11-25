@@ -1,4 +1,4 @@
-#include "Magic/TextPainterImpl.h"
+#include "Magic/HorizontalTextPainterImpl.h"
 #include <QPainter>
 QImage PaintTextOnQImge(QImage& img, const QString& text)
 {
@@ -15,14 +15,14 @@ QImage PaintTextOnQImge(QImage& img, const QString& text)
 	painter.setPen(pen);
 	painter.setFont(font);
 
-	painter.drawText(newImg.rect(), Qt::AlignCenter, text);
-	//将Hello写在Image的中心
+	painter.drawText(newImg.rect(), Qt::AlignTop | Qt::AlignLeft, text);
 	return newImg;
 }
 
-QImage TextPainterImpl::PaintText(MImage& img, const std::string& text)
+QImage HorizontalTextPainterImpl::PaintText(MImage& img, const std::string& text)
 {
-	QString str = QString::fromStdString(text);
-	return PaintTextOnQImge(img.GetQImage(), str);
+	return QTextPainter::PaintText(img, text);
+	//QString str = QString::fromStdString(text);
+	//return PaintTextOnQImge(img.GetQImage(), str);
 }
 

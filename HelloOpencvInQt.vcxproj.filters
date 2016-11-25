@@ -203,10 +203,25 @@
     <ClCompile Include="InputTextDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Magic\TextPainterImpl.cpp">
+    <ClCompile Include="Magic\Assigner.cpp">
       <Filter>Magic</Filter>
     </ClCompile>
-    <ClCompile Include="Magic\Assigner.cpp">
+    <ClCompile Include="Magic\HorizontalTextPainterImpl.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="Magic\VerticalTextPainterImpl.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="Magic\QTextPainter.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveImageDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Magic\GrabCutor.cpp">
+      <Filter>Magic</Filter>
+    </ClCompile>
+    <ClCompile Include="Magic\Stretchor.cpp">
       <Filter>Magic</Filter>
     </ClCompile>
   </ItemGroup>
@@ -240,6 +255,9 @@
     </CustomBuild>
     <CustomBuild Include="InputTextDialog.h">
       <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SaveImageDialog.ui">
+      <Filter>Form Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -356,13 +374,28 @@
     <ClInclude Include="GeneratedFiles\ui_InputTextDialog.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="Magic\TextPainter.h">
-      <Filter>Magic</Filter>
-    </ClInclude>
-    <ClInclude Include="Magic\TextPainterImpl.h">
-      <Filter>Magic</Filter>
-    </ClInclude>
     <ClInclude Include="Magic\Assigner.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\HorizontalTextPainterImpl.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\VerticalTextPainterImpl.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\QTextPainter.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_SaveImageDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveImageDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\GrabCutor.h">
+      <Filter>Magic</Filter>
+    </ClInclude>
+    <ClInclude Include="Magic\Stretchor.h">
       <Filter>Magic</Filter>
     </ClInclude>
   </ItemGroup>

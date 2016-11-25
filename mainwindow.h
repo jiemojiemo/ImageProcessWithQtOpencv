@@ -33,6 +33,7 @@ private slots:
 	void on_actionUndo_triggered();
 	void on_actionBatching_triggered();
 	void on_actionImage_Database_triggered();
+	void on_actionShare_To_Weibo_triggered();
 	//Rotate
 	void on_actionLeft_90_triggered();
 	void on_actionRight_90_triggered();
@@ -40,12 +41,12 @@ private slots:
     void on_actionEdge_Detect_triggered();
 	void on_actionGray_Scale_triggered();
 	void on_actionOil_triggered();
-	void on_actionContour_triggered();
+	void on_actionStrech_triggered();
 	void on_actionEmboss_triggered();
 	void on_actionCarve_triggered();
 	//AddText
 	void on_actionHorizontal_Text_triggered();
-	void on_actionVertical_Text_triggered();
+	//void on_actionVertical_Text_triggered();
 
 	void ReceiveImage(cv::Mat& img);
 	void ReceiveImage(QImage& img);
@@ -64,9 +65,11 @@ private:
 	void SetLayout();
 
 	void SetNewImageState();
+	void SetNoImageState();
 	void SetFileActionsDisable(bool b=false);
 	void SetProcessDisabled(bool b=false);
 	void SetRotateDisabled(bool b = false);
+	void SetAddTextDisable(bool b = false);
 private:
     Ui::MainWindow *ui;
 	QGridLayout* m_layout;

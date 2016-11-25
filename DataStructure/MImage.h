@@ -29,6 +29,9 @@ public:
 	QImage& GetQImage() { m_isMat=false; return m_qImg; }
 	inline void SetQImage(const QImage& val);
 
+	int GetWidth()const { return m_qImg.width(); }
+	int GetHeight()const { return m_qImg.height(); }
+
 private:
 	void UpdateImage();
 

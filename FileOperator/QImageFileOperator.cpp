@@ -26,7 +26,7 @@ bool QImageFileOperator::Save( const MImage& img, const std::string& filename)
 	return true;
 }
 
-bool QImageFileOperator::SaveAs( const MImage& img)
+std::string QImageFileOperator::SaveAs( const MImage& img)
 {
 	QImage qImg(img.GetQImage());
 
@@ -35,20 +35,16 @@ bool QImageFileOperator::SaveAs( const MImage& img)
 		"",
 		QObject::tr("*.bmp;; *.png;; *.jpg;; *.tif;; *.GIF")); //select path
 
-	if (filename.isEmpty())
-	{
-		return false;
-	}
-	else
+	if (!filename.isEmpty())
 	{
 		if (!(qImg.save(filename))) //±£´æÍ¼Ïñ  
 		{
 			QMessageBox::information(nullptr,
 				QObject::tr("Failed to save the image"),
 				QObject::tr("Failed to save the image!"));
-			return false;
+			return std::string();
 		}
 	}
-	return true;
+	return filename.toStdString();
 }
 

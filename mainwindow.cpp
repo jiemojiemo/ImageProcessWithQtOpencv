@@ -8,7 +8,7 @@
 #include "Magic/GrayScaler.h"
 #include "Magic/OilPainter.h"
 #include "Magic/MagicianFactory.h"
-#include "Magic/TextPainterImpl.h"
+#include "Magic/HorizontalTextPainterImpl.h"
 #include "FileOperator/QImageFileOperator.h"
 #include "Context/Context.h"
 #include "iconwidget.h"
@@ -16,6 +16,7 @@
 #include "batchwindow.hpp"
 #include "ImageDatabaseWindow.h"
 #include "InputTextDialog.h"
+#include "SaveImageDialog.h"
 
 #include <memory>
 
@@ -26,6 +27,8 @@
 #include <QMatrix>
 #include <QGridLayout>
 #include <QTextEdit>
+
+#include <windows.h>
 
 #define GET_CLASS_DO_MAGIC_THEN_SHOW(className)			\
 auto magician(MagicianFactory::SharedMagicianFactory().GetMagicianByName(className));\
@@ -88,7 +91,7 @@ QString MainWindow::GetFilename()
 
 void MainWindow::PaintTextOnImage(const QString& text)
 {
-	TextPainter* painter = new TextPainterImpl();
+	QTextPainter* painter = new HorizontalTextPainterImpl();
 	ON_SCOPE_EXIT([&painter]() {delete painter; });
 
 	m_img = painter->PaintText(m_img, text.toStdString());
@@ -146,9 +149,7 @@ void MainWindow::InitUi()
 	ui->graphicsView->setScene(m_graphicsScene);
 	ui->graphicsView->show();
 
-	SetProcessDisabled(true);
-	SetFileActionsDisable(true);
-	SetRotateDisabled(true);
+	SetNoImageState();
 }
 
 void MainWindow::AdjustSize(int newW/*=700*/, int newH/*=600*/)
@@ -171,6 +172,15 @@ void MainWindow::SetNewImageState()
 	SetProcessDisabled(false);
 	SetFileActionsDisable(false);
 	SetRotateDisabled(false);
+	SetAddTextDisable(false);
+}
+
+void MainWindow::SetNoImageState()
+{
+	SetProcessDisabled(true);
+	SetFileActionsDisable(true);
+	SetRotateDisabled(true);
+	SetAddTextDisable(true);
 }
 
 void MainWindow::SetFileActionsDisable(bool b/*=false*/)
@@ -178,6 +188,7 @@ void MainWindow::SetFileActionsDisable(bool b/*=false*/)
 	ui->actionClose->setDisabled(b);
 	ui->actionSave->setDisabled(b);
 	ui->actionSave_As->setDisabled(b);
+	ui->actionShare_To_Weibo->setDisabled(b);
 }
 
 void MainWindow::SetProcessDisabled(bool b)
@@ -188,6 +199,11 @@ void MainWindow::SetProcessDisabled(bool b)
 void MainWindow::SetRotateDisabled(bool b /*= false*/)
 {
 	ui->menuRotate->setDisabled(b);
+}
+
+void MainWindow::SetAddTextDisable(bool b /*= false*/)
+{
+	ui->menuAddText->setDisabled(b);
 }
 
 void MainWindow::on_actionOpen_triggered()
@@ -207,20 +223,35 @@ void MainWindow::on_actionOpen_triggered()
 void MainWindow::on_actionClose_triggered()
 {
     ui->graphicsView->scene()->clear();
-	SetProcessDisabled(true);
-	SetFileActionsDisable(true);
+	Context::GetContext().SetCurrentFilename("");
+	SetNoImageState();
 }
 
 void MainWindow::on_actionSave_triggered()
 {
-	std::unique_ptr<ImageFileOperator> fileOperator(std::make_unique<QImageFileOperator>());
-	fileOperator->Save(m_img, Context::GetContext().GetCurrentFilename().toStdString());
+	if (Context::GetContext().GetCurrentFilename() == "")
+	{
+		on_actionSave_As_triggered();
+	}
+	else
+	{
+		SaveImageDialog dialog;
+		if (dialog.exec() == QDialog::Accepted)
+		{
+			std::unique_ptr<ImageFileOperator> fileOperator(std::make_unique<QImageFileOperator>());
+			fileOperator->Save(m_img, Context::GetContext().GetCurrentFilename().toStdString());
+		}
+	}
 }
 
 void MainWindow::on_actionSave_As_triggered()
 {
 	auto fileOperator(std::make_unique<QImageFileOperator>());
-	fileOperator->SaveAs(m_img);
+	auto newFilename = fileOperator->SaveAs(m_img);
+	if (!newFilename.empty())
+	{
+		Context::GetContext().SetCurrentFilename(QString::fromStdString(newFilename));
+	}
 }
 
 void MainWindow::on_actionBatching_triggered()
@@ -246,6 +277,18 @@ void MainWindow::on_actionImage_Database_triggered()
 	m_databaseWin->show();
 
 }
+
+void MainWindow::on_actionShare_To_Weibo_triggered()
+{
+	auto fileOperator(std::make_unique<QImageFileOperator>());
+
+	auto filepath = Context::GetContext().GetCurrentFilename();
+	auto a = filepath.toStdString();
+	std::string execLine = "G:\\C++\\HelloOpencvInQt\\dist\\testFuck.exe By-magic ";
+	execLine += a;
+	WinExec(execLine.c_str(), SW_HIDE);
+}
+
 
 void MainWindow::on_actionLeft_90_triggered()
 {
@@ -276,7 +319,7 @@ void MainWindow::on_actionOil_triggered()
 	DO_PROCESS_AND_SHOW;
 }
 
-void MainWindow::on_actionContour_triggered()
+void MainWindow::on_actionStrech_triggered()
 {
 	DO_PROCESS_AND_SHOW;
 }
@@ -299,13 +342,13 @@ void MainWindow::on_actionHorizontal_Text_triggered()
 	ShowImage(m_img);
 }
 
-void MainWindow::on_actionVertical_Text_triggered()
-{
-	DO_PROCESS_AND_SHOW;
-	auto text = GetText();
-	PaintTextOnImage(text);
-	ShowImage(m_img);
-}
+//void MainWindow::on_actionVertical_Text_triggered()
+//{
+//	DO_PROCESS_AND_SHOW;
+//	auto text = GetText();
+//	PaintTextOnImage(text);
+//	ShowImage(m_img);
+//}
 
 void MainWindow::on_actionUndo_triggered()
 {
@@ -315,6 +358,7 @@ void MainWindow::on_actionUndo_triggered()
 
 void MainWindow::ReceiveImage(cv::Mat& mat)
 {
+	Context::GetContext().SetCurrentFilename("");
 	m_img = mat;
 	SetNewImageState();
 	ShowImage(m_img);
@@ -322,6 +366,7 @@ void MainWindow::ReceiveImage(cv::Mat& mat)
 
 void MainWindow::ReceiveImage(QImage& img)
 {
+	Context::GetContext().SetCurrentFilename("");
 	m_img = img;
 	SetNewImageState();
 	ShowImage(m_img);

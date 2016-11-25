@@ -47,9 +47,20 @@ QImage& IconWidget::GetQImage()
 	return m_img->GetQImage();
 }
 
+void IconWidget::SetQImage(const QImage& qImg)
+{
+	m_img->SetQImage(qImg);
+	UpdateBackgound();
+}
+
 cv::Mat& IconWidget::GetMat()
 {
 	return m_img->GetMat();
+}
+
+MImage& IconWidget::GetMImage()const
+{
+	return *m_img;
 }
 
 QString IconWidget::GetImagePath()

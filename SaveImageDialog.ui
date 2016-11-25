@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>InputTextDialog</class>
- <widget class="QDialog" name="InputTextDialog">
+ <class>SaveImageDialog</class>
+ <widget class="QDialog" name="SaveImageDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>297</height>
+    <width>388</width>
+    <height>156</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,15 +16,22 @@
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>381</width>
-     <height>281</height>
+     <x>11</x>
+     <y>20</y>
+     <width>371</width>
+     <height>131</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout_2">
+   <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QTextEdit" name="textEdit_2"/>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>这个操作会覆盖原图，是否继续？</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
     </item>
     <item row="1" column="0">
      <layout class="QHBoxLayout">
@@ -80,7 +87,7 @@
   <connection>
    <sender>okButton</sender>
    <signal>clicked()</signal>
-   <receiver>InputTextDialog</receiver>
+   <receiver>SaveImageDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -96,7 +103,7 @@
   <connection>
    <sender>cancelButton</sender>
    <signal>clicked()</signal>
-   <receiver>InputTextDialog</receiver>
+   <receiver>SaveImageDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

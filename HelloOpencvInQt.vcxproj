@@ -193,17 +193,22 @@
     <ClCompile Include="Magic\EdgeDetector2.cpp" />
     <ClCompile Include="Magic\EdgeDetector.cpp" />
     <ClCompile Include="Magic\Embosser.cpp" />
+    <ClCompile Include="Magic\GrabCutor.cpp" />
     <ClCompile Include="Magic\GrayScaler.cpp" />
     <ClCompile Include="Magic\HorizontalMerger.cpp" />
     <ClCompile Include="Magic\ImageMeger.cpp" />
     <ClCompile Include="Magic\MagicianFactory.cpp" />
     <ClCompile Include="Magic\OilPainter.cpp" />
     <ClCompile Include="Magic\ClockWiseRotator.cpp" />
-    <ClCompile Include="Magic\TextPainterImpl.cpp" />
+    <ClCompile Include="Magic\HorizontalTextPainterImpl.cpp" />
+    <ClCompile Include="Magic\QTextPainter.cpp" />
+    <ClCompile Include="Magic\Stretchor.cpp" />
     <ClCompile Include="Magic\VerticalMerger.cpp" />
+    <ClCompile Include="Magic\VerticalTextPainterImpl.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="ImageBox.cpp" />
+    <ClCompile Include="SaveImageDialog.cpp" />
     <ClCompile Include="SQLite\ImageDatabaseWindow.cpp" />
     <ClCompile Include="SQLite\ImageModel.cpp" />
     <ClCompile Include="SQLite\SQLSelector.cpp" />
@@ -230,10 +235,15 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\opencv\include" "-I.\opencv\include\opencv" "-I.\opencv\include\opencv2" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc2015" "-I.\GeneratedFiles"</Command>
     </CustomBuild>
+    <ClInclude Include="GeneratedFiles\ui_SaveImageDialog.h" />
     <ClInclude Include="Magic\Assigner.h" />
-    <ClInclude Include="Magic\TextPainter.h" />
-    <ClInclude Include="Magic\TextPainterImpl.h" />
+    <ClInclude Include="Magic\GrabCutor.h" />
+    <ClInclude Include="Magic\QTextPainter.h" />
+    <ClInclude Include="Magic\HorizontalTextPainterImpl.h" />
+    <ClInclude Include="Magic\Stretchor.h" />
     <ClInclude Include="Magic\VerticalMerger.h" />
+    <ClInclude Include="Magic\VerticalTextPainterImpl.h" />
+    <ClInclude Include="SaveImageDialog.h" />
     <ClInclude Include="SQLite\DataModel.h" />
     <ClInclude Include="SQLite\ImageModel.h" />
     <ClInclude Include="SQLite\SQLiteSelector.h" />
@@ -349,6 +359,18 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="InputTextDialog.ui">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="SaveImageDialog.ui">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Uic%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>

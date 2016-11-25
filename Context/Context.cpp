@@ -59,7 +59,6 @@ QString Context::GetCurrentFilename() const
 
 void Context::SetCurrentFilename(const QString& filename)
 {
-	assert(!filename.isEmpty());
 	m_pImpl->m_currentFilename = filename;
 }
 

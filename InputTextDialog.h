@@ -15,5 +15,5 @@ public:
 	QString GetTextEditString();
 
 private:
-	Ui::Dialog ui;
+	Ui::InputTextDialog ui;
 };

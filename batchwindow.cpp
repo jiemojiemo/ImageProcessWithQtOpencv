@@ -1,6 +1,8 @@
 ﻿#include "batchwindow.hpp"
 #include "iconwidget.h"
 #include "ImageBox.h"
+#include "SaveImageDialog.h"
+#include "InputTextDialog.h"
 #include "DataStructure/MImage.h"
 #include "DataStructure/BufferImage.h"
 #include "FileOperator/QImageBatchFileOperator.h"
@@ -9,6 +11,7 @@
 #include "Magic/ImageMeger.h"
 #include "Magic/HorizontalMerger.h"
 #include "Magic/VerticalMerger.h"
+#include "Magic/HorizontalTextPainterImpl.h"
 
 #include <algorithm>
 
@@ -30,7 +33,8 @@ for (auto &iter : m_iconList)\
 const int BatchWindow::kWinWidth = 700;
 const int BatchWindow::kWinHeight = 600;
 
-BatchWindow::BatchWindow(QWidget * parent) : QMainWindow(parent) 
+BatchWindow::BatchWindow(QWidget * parent) : QMainWindow(parent),
+	m_textWin(nullptr)
 {
 	m_layout = new QGridLayout(this);
 	m_containWidget = new QWidget(this);
@@ -104,6 +108,28 @@ void BatchWindow::on_actionUndo_triggered()
 	}
 }
 
+void BatchWindow::on_actionSave_triggered()
+{
+	SaveImageDialog dialog;
+	if (dialog.exec() == QDialog::Accepted)
+	{
+		std::unique_ptr<ImageFileOperator> fileOperator(std::make_unique<QImageFileOperator>());
+		for (auto& item : m_iconList)
+		{
+			fileOperator->Save(item->GetMImage(), Context::GetContext().GetCurrentFilename().toStdString());
+		}
+	}
+}
+
+void BatchWindow::on_actionSave_As_triggered()
+{
+	std::unique_ptr<ImageFileOperator> fileOperator(std::make_unique<QImageFileOperator>());
+	for (auto& item : m_iconList)
+	{
+		fileOperator->Save(item->GetMImage(), GetNewNameForSaveAs(item->GetImagePath()).toStdString());
+	}
+}
+
 void BatchWindow::on_actionVertical_Merge_triggered()
 {
 	ImageMerger* merge = new VerticalMerger;
@@ -133,6 +159,21 @@ void BatchWindow::on_actionOil_triggered()
 	DO_PROCESS_AND_SHOW;
 }
 
+void BatchWindow::on_actionEmboss_triggered()
+{
+	DO_PROCESS_AND_SHOW;
+}
+
+void BatchWindow::on_actionCarve_triggered()
+{
+	DO_PROCESS_AND_SHOW;
+}
+
+void BatchWindow::on_actionStrech_triggered()
+{
+	DO_PROCESS_AND_SHOW;
+}
+
 void BatchWindow::on_actionLeft_90_triggered()
 {
 	DO_PROCESS_AND_SHOW;
@@ -141,6 +182,19 @@ void BatchWindow::on_actionLeft_90_triggered()
 void BatchWindow::on_actionRight_90_triggered()
 {
 	DO_PROCESS_AND_SHOW;
+}
+
+void BatchWindow::on_actionHorizontal_Text_triggered()
+{
+	DO_PROCESS_AND_SHOW;
+	auto text = GetText();
+	QTextPainter* painter = new HorizontalTextPainterImpl();
+	ON_SCOPE_EXIT([&painter]() {delete painter; });
+
+	for (auto& item : m_iconList)
+	{
+		item->SetQImage(painter->PaintText(item->GetMImage(), text.toStdString()));
+	}
 }
 
 void BatchWindow::RemoveIcon(IconWidget* removeItem)
@@ -190,14 +244,14 @@ void BatchWindow::AddImage(const std::list<std::string>& imgPathList)
 	}
 }
 
-int BatchWindow::GetWidgetRowIndex()
+int BatchWindow::GetWidgetRowIndex()const
 {
 	int rowMaxCount = kWinWidth / IconWidget::kWindowWidth;
 	int iconWidgetCount = m_iconList.size()-1;
 	return iconWidgetCount / rowMaxCount;
 }
 
-int BatchWindow::GetWidgetColIndex()
+int BatchWindow::GetWidgetColIndex()const
 {
 	int rowMaxCount = kWinWidth / IconWidget::kWindowWidth;
 	int iconWidgetCount = m_iconList.size()-1;
@@ -216,16 +270,22 @@ void BatchWindow::MergeImages(ImageMerger* merge)
 
 void BatchWindow::SetNewImageState()
 {
+	ui.actionSave->setDisabled(false);
+	ui.actionSave_As->setDisabled(false);
 	SetProcessDisable(false);
 	SetRotateDisable(false);
 	SetMergeDisable(false);
+	SetAddTextDiable(false);
 }
 
 void BatchWindow::SetNoImageState()
 {
+	ui.actionSave->setDisabled(true);
+	ui.actionSave_As->setDisabled(true);
 	SetProcessDisable(true);
 	SetRotateDisable(true);
 	SetMergeDisable(true);
+	SetAddTextDiable(true);
 }
 
 void BatchWindow::SetProcessDisable(bool b /*= true*/)
@@ -241,4 +301,33 @@ void BatchWindow::SetRotateDisable(bool b /*= true*/)
 void BatchWindow::SetMergeDisable(bool b /*= true*/)
 {
 	ui.menuMerge->setDisabled(b);
+}
+
+void BatchWindow::SetAddTextDiable(bool b /*= true*/)
+{
+	ui.menuAddText->setDisabled(b);
+}
+
+QString BatchWindow::GetNewNameForSaveAs(const QString& name)const
+{
+	QStringList strList = name.split(".");
+	QString newName = strList.at(0) + "_copy." + strList.at(1);
+	return newName;
+}
+
+QString BatchWindow::GetText()
+{
+	if (m_textWin == nullptr)
+	{
+		m_textWin = new InputTextDialog(this);
+
+	}
+	if (m_textWin->exec() == QDialog::Accepted)
+	{
+		return m_textWin->GetTextEditString();
+	}
+	else
+	{
+		return QString();
+	}
 }

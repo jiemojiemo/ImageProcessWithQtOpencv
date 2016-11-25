@@ -12,5 +12,5 @@ public:
 
 	virtual std::string Open() = 0;
 	virtual bool Save( const MImage& img, const std::string& filename) = 0;
-	virtual bool SaveAs( const MImage& img) = 0;
+	virtual std::string SaveAs( const MImage& img) = 0;
 };

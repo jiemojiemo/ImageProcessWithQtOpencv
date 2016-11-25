@@ -4,7 +4,7 @@
 
 //Openvc
 #include "imgproc.hpp"
-#include "highgui.hpp"
+#include "imgcodecs.hpp"
 
 MImage::MImage() :Image()
 {
@@ -15,9 +15,11 @@ MImage::MImage(const std::string& path): MImage(QString::fromStdString(path))
 {
 }
 
-MImage::MImage(const QString& path):m_qImg(path)
+MImage::MImage(const QString& path)
 {
-	m_mat = QtOcv::image2Mat(m_qImg);
+	m_mat = cv::imread(path.toLocal8Bit().data());
+	m_qImg = QtOcv::mat2Image(m_mat);
+
 }
 
 MImage::MImage(const MImage& img)

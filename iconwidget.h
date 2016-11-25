@@ -23,7 +23,10 @@ public:
 
 	const QImage& GetQImage()const;
 	QImage& GetQImage();
+	void SetQImage(const QImage& qImg);
 	cv::Mat& GetMat();
+	MImage& GetMImage()const;
+
 	QString GetImagePath();
 
 	void Undo();
